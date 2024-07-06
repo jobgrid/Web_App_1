@@ -56,9 +56,9 @@ footer {
 }
 
 .job-card {
-    background-color: #1e5a99;
-    color: #fff;
-    border-radius: 8px;
+    background-color: #f0f0f0; /* Light gray background */
+    color: #000; /* Dark text color for contrast */
+    border-radius: 15px; /* Rounded edges */
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
