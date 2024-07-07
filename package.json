@@ -1,0 +1,14 @@
+{
+  "name": "web_app_1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Build script placeholder'",
+    "start": "echo 'Start script placeholder'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
