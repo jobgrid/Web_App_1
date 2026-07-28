@@ -45,7 +45,10 @@ export default async function CandidateProfilePage({
         cvFilename={candidateProfile?.cv_filename ?? null}
         updatedAt={candidateProfile?.updated_at ?? null}
       />
-      {candidateProfile && <ProfileForm profile={candidateProfile} />}
+      {/* Keyed by updated_at so the form remounts with fresh values after a CV upload. */}
+      {candidateProfile && (
+        <ProfileForm key={candidateProfile.updated_at} profile={candidateProfile} />
+      )}
     </div>
   );
 }

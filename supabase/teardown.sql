@@ -6,8 +6,10 @@
 -- Auth trigger first so user deletion doesn't fire it.
 drop trigger if exists on_auth_user_created on auth.users;
 
--- Storage: objects, then policies, then buckets.
-delete from storage.objects where bucket_id in ('cvs', 'voice', 'logos');
+-- Storage: Supabase blocks SQL deletes on storage.objects, so empty the
+-- 'cvs', 'voice' and 'logos' buckets first via the dashboard or Storage API
+-- (e.g. `supabase storage rm -r ss:///cvs`). Then this script drops the
+-- policies and buckets.
 drop policy if exists "candidates manage own cvs" on storage.objects;
 drop policy if exists "employers read applicant cvs" on storage.objects;
 drop policy if exists "participants manage voice notes" on storage.objects;
