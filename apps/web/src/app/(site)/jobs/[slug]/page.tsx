@@ -14,6 +14,7 @@ import {
   initials,
   timeAgo,
 } from "@/lib/format";
+import { createAnonClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function JobDetailPage({
@@ -73,13 +74,15 @@ export default async function JobDetailPage({
     };
   }
 
-  // Record the view without blocking the response.
+  // Record the view without blocking the response. Uses the anon client:
+  // cookies() is unavailable inside after(), and RLS allows anonymous
+  // view events on active jobs.
+  const viewerId = user?.id ?? null;
   after(async () => {
-    const sb = await createClient();
-    await sb.from("job_events").insert({
+    await createAnonClient().from("job_events").insert({
       job_id: job.id,
       event_type: "view",
-      actor_id: user?.id ?? null,
+      actor_id: viewerId,
     });
   });
 

@@ -15,29 +15,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { TIER_LABELS, daysUntil, lastNDaysIso } from "@/lib/format";
-import { createClient } from "@/lib/supabase/server";
+import { requireCompany } from "@/lib/supabase/queries";
 
 export const metadata: Metadata = { title: "Employer dashboard" };
 
 export default async function EmployerDashboardPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { data: company } = await supabase
-    .from("companies")
-    .select("*")
-    .eq("owner_id", user!.id)
-    .single();
+  const { supabase, company } = await requireCompany();
 
   const [{ data: stats }, { data: daily }, { data: jobs }] = await Promise.all([
-    supabase.rpc("company_job_stats", { p_company_id: company!.id }),
-    supabase.rpc("company_daily_events", { p_company_id: company!.id, p_days: 30 }),
+    supabase.rpc("company_job_stats", { p_company_id: company.id }),
+    supabase.rpc("company_daily_events", { p_company_id: company.id, p_days: 30 }),
     supabase
       .from("jobs")
       .select("id, title, slug, tier, status, expires_at")
-      .eq("company_id", company!.id)
+      .eq("company_id", company.id)
       .order("created_at", { ascending: false }),
   ]);
 
@@ -67,7 +58,7 @@ export default async function EmployerDashboardPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">{company!.name}</h1>
+          <h1 className="text-xl font-semibold tracking-tight">{company.name}</h1>
           <p className="text-sm text-muted-foreground">
             {activeJobs.length} live ad{activeJobs.length === 1 ? "" : "s"} · last 30 days below
           </p>

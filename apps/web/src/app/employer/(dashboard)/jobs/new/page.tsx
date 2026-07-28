@@ -1,28 +1,19 @@
 import type { Metadata } from "next";
 
 import { PostJobForm } from "@/components/employer/post-job-form";
-import { createClient } from "@/lib/supabase/server";
+import { requireCompany } from "@/lib/supabase/queries";
 
 export const metadata: Metadata = { title: "Post a job" };
 
 export default async function NewJobPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { data: company } = await supabase
-    .from("companies")
-    .select("id")
-    .eq("owner_id", user!.id)
-    .single();
+  const { supabase, company } = await requireCompany();
 
   const [{ data: products }, { data: purchases }] = await Promise.all([
     supabase.from("ad_products").select("*").order("sort"),
     supabase
       .from("purchases")
       .select("product_code, credits_remaining")
-      .eq("company_id", company!.id),
+      .eq("company_id", company.id),
   ]);
 
   const credits: Record<string, number> = {};

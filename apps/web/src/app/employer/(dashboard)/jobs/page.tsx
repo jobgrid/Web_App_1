@@ -14,27 +14,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { TIER_LABELS, daysUntil, timeAgo } from "@/lib/format";
-import { createClient } from "@/lib/supabase/server";
+import { requireCompany } from "@/lib/supabase/queries";
 
 export const metadata: Metadata = { title: "Jobs & applicants" };
 
 export default async function EmployerJobsPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { data: company } = await supabase
-    .from("companies")
-    .select("id")
-    .eq("owner_id", user!.id)
-    .single();
+  const { supabase, company } = await requireCompany();
 
   const [{ data: jobs }, { data: applications }] = await Promise.all([
     supabase
       .from("jobs")
       .select("*")
-      .eq("company_id", company!.id)
+      .eq("company_id", company.id)
       .order("created_at", { ascending: false }),
     supabase.from("applications").select("id, job_id"),
   ]);

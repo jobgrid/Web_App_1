@@ -12,28 +12,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatPrice, timeAgo } from "@/lib/format";
-import { createClient } from "@/lib/supabase/server";
+import { requireCompany } from "@/lib/supabase/queries";
 
 export const metadata: Metadata = { title: "Billing" };
 
 export default async function BillingPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { data: company } = await supabase
-    .from("companies")
-    .select("id")
-    .eq("owner_id", user!.id)
-    .single();
+  const { supabase, company } = await requireCompany();
 
   const [{ data: products }, { data: purchases }] = await Promise.all([
     supabase.from("ad_products").select("*").order("sort"),
     supabase
       .from("purchases")
       .select("*, ad_products(name)")
-      .eq("company_id", company!.id)
+      .eq("company_id", company.id)
       .order("created_at", { ascending: false }),
   ]);
 
