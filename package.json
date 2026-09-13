@@ -1,14 +1,11 @@
 {
-  "name": "web_app_1",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "jobgrid",
+  "private": true,
   "scripts": {
-    "build": "echo 'Build script placeholder'",
-    "start": "echo 'Start script placeholder'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "pnpm --filter @jobgrid/web dev",
+    "build": "pnpm --filter @jobgrid/web build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "packageManager": "pnpm@10.33.3"
 }
