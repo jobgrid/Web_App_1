@@ -1,125 +1,159 @@
-import { useEffect, useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Switch,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useCallback, useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Switch, Text, View } from "react-native";
 
-import { supabase } from "../lib/supabase";
+import { Avatar } from "../components/Avatar";
+import { GlassButton, GlassCard, Pill } from "../components/Glass";
+import { toast } from "../components/Toast";
+import { getCandidateProfileDetails, setAutoApply } from "../lib/data";
+import { supabase, type Company, type Profile } from "../lib/supabase";
 import { colors } from "../theme";
 
-type CandidateProfile = {
-  headline: string;
-  location: string;
-  skills: string[];
-  cv_filename: string | null;
-  auto_apply: boolean;
-  auto_apply_min_score: number;
-};
+type CandidateDetails = NonNullable<Awaited<ReturnType<typeof getCandidateProfileDetails>>>;
 
-export function ProfileScreen({ userId }: { userId: string }) {
-  const [fullName, setFullName] = useState("");
-  const [profile, setProfile] = useState<CandidateProfile | null>(null);
+export function ProfileScreen({
+  profile,
+  company,
+}: {
+  profile: Profile;
+  company: Company | null;
+}) {
+  const [details, setDetails] = useState<CandidateDetails | null>(null);
+  const isCandidate = profile.role === "candidate";
+
+  const load = useCallback(async () => {
+    if (isCandidate) setDetails(await getCandidateProfileDetails(profile.id));
+  }, [isCandidate, profile.id]);
 
   useEffect(() => {
-    supabase
-      .from("profiles")
-      .select("full_name")
-      .eq("id", userId)
-      .single()
-      .then(({ data }) => setFullName((data as { full_name: string } | null)?.full_name ?? ""));
-    supabase
-      .from("candidate_profiles")
-      .select("headline, location, skills, cv_filename, auto_apply, auto_apply_min_score")
-      .eq("user_id", userId)
-      .maybeSingle()
-      .then(({ data }) => setProfile(data as CandidateProfile | null));
-  }, [userId]);
+    load();
+  }, [load]);
 
-  async function toggleAutoApply(value: boolean) {
-    setProfile((previous) => (previous ? { ...previous, auto_apply: value } : previous));
-    await supabase.from("candidate_profiles").update({ auto_apply: value }).eq("user_id", userId);
+  async function toggleAutoApply(enabled: boolean) {
+    setDetails((previous) => (previous ? { ...previous, auto_apply: enabled } : previous));
+    await setAutoApply(profile.id, enabled);
+    toast(enabled ? "Auto-apply is on — AI will apply for strong matches." : "Auto-apply is off.");
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
       <Text style={styles.title}>Profile</Text>
-      <View style={styles.card}>
-        <Text style={styles.name}>{fullName}</Text>
-        {profile?.headline ? <Text style={styles.headline}>{profile.headline}</Text> : null}
-        {profile?.location ? <Text style={styles.meta}>{profile.location}</Text> : null}
-        <Text style={styles.meta}>
-          CV: {profile?.cv_filename ?? "not uploaded — add it at jobgrid.ai"}
-        </Text>
-      </View>
 
-      {profile && (
+      <GlassCard style={styles.identityCard}>
+        <Avatar name={profile.full_name} size={64} color={company?.brand_color} />
+        <View style={{ flex: 1, gap: 3 }}>
+          <Text style={styles.name}>{profile.full_name}</Text>
+          <Text style={styles.email}>{profile.email}</Text>
+          <Pill
+            label={isCandidate ? "Job seeker" : `Employer · ${company?.name ?? ""}`}
+            fg={colors.primary}
+            bg={colors.primarySoft}
+          />
+        </View>
+      </GlassCard>
+
+      {isCandidate && details && (
         <>
-          <View style={styles.card}>
-            <View style={styles.rowBetween}>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.sectionTitle}>Auto-apply</Text>
-                <Text style={styles.meta}>
-                  Apply automatically at ≥{profile.auto_apply_min_score}% match
+          <GlassCard style={styles.sectionCard}>
+            <Text style={styles.sectionTitle}>About you</Text>
+            <View style={styles.rowItem}>
+              <Ionicons name="briefcase-outline" size={16} color={colors.muted} />
+              <Text style={styles.rowText}>{details.headline || "Add a headline on the web"}</Text>
+            </View>
+            <View style={styles.rowItem}>
+              <Ionicons name="location-outline" size={16} color={colors.muted} />
+              <Text style={styles.rowText}>
+                {details.location || "No location set"}
+                {details.open_to_remote ? " · open to remote" : ""}
+              </Text>
+            </View>
+            <View style={styles.rowItem}>
+              <Ionicons name="document-attach-outline" size={16} color={colors.muted} />
+              <Text style={styles.rowText}>
+                {details.cv_filename ? `CV: ${details.cv_filename}` : "No CV uploaded yet"}
+              </Text>
+            </View>
+          </GlassCard>
+
+          <GlassCard style={styles.sectionCard}>
+            <Text style={styles.sectionTitle}>Skills</Text>
+            <View style={styles.skillRow}>
+              {details.skills.length > 0 ? (
+                details.skills.map((skill) => (
+                  <Pill key={skill} label={skill} fg={colors.primary} bg={colors.primarySoft} />
+                ))
+              ) : (
+                <Text style={styles.rowText}>Upload your CV and AI extracts these for you.</Text>
+              )}
+            </View>
+          </GlassCard>
+
+          <GlassCard style={styles.sectionCard}>
+            <View style={styles.autoApplyRow}>
+              <View style={{ flex: 1, gap: 3 }}>
+                <Text style={styles.sectionTitle}>⚡ Auto-apply</Text>
+                <Text style={styles.hint}>
+                  AI applies for you when a new job matches at {details.auto_apply_min_score}%+.
                 </Text>
               </View>
               <Switch
-                value={profile.auto_apply}
+                value={details.auto_apply}
                 onValueChange={toggleAutoApply}
-                trackColor={{ true: colors.primary }}
+                trackColor={{ true: colors.primary, false: "rgba(18,20,43,0.15)" }}
+                thumbColor="#fff"
               />
             </View>
-          </View>
-
-          {profile.skills.length > 0 && (
-            <View style={styles.card}>
-              <Text style={styles.sectionTitle}>Skills</Text>
-              <View style={styles.skills}>
-                {profile.skills.map((skill) => (
-                  <View key={skill} style={styles.skillBadge}>
-                    <Text style={styles.skillText}>{skill}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-          )}
+          </GlassCard>
         </>
       )}
 
-      <TouchableOpacity style={styles.signOut} onPress={() => supabase.auth.signOut()}>
-        <Text style={styles.signOutText}>Sign out</Text>
-      </TouchableOpacity>
+      {!isCandidate && company && (
+        <GlassCard style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Company</Text>
+          <View style={styles.rowItem}>
+            <Ionicons name="business-outline" size={16} color={colors.muted} />
+            <Text style={styles.rowText}>{company.name}</Text>
+          </View>
+          {!!company.tagline && (
+            <View style={styles.rowItem}>
+              <Ionicons name="sparkles-outline" size={16} color={colors.muted} />
+              <Text style={styles.rowText}>{company.tagline}</Text>
+            </View>
+          )}
+          {!!company.location && (
+            <View style={styles.rowItem}>
+              <Ionicons name="location-outline" size={16} color={colors.muted} />
+              <Text style={styles.rowText}>{company.location}</Text>
+            </View>
+          )}
+          <Text style={styles.hint}>
+            Manage billing, ad credits, API keys and ATS connections from the web dashboard.
+          </Text>
+        </GlassCard>
+      )}
+
+      <GlassButton
+        label="Sign out"
+        danger
+        icon={<Ionicons name="log-out-outline" size={16} color={colors.danger} />}
+        onPress={() => supabase.auth.signOut()}
+      />
+      <View style={{ height: 120 }} />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16, gap: 12 },
-  title: { fontSize: 22, fontWeight: "800", color: colors.text },
-  card: {
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 14,
-    padding: 16,
-    gap: 4,
-  },
-  name: { fontSize: 18, fontWeight: "800", color: colors.text },
-  headline: { fontSize: 14, color: colors.text },
-  meta: { fontSize: 13, color: colors.muted },
-  sectionTitle: { fontSize: 14, fontWeight: "700", color: colors.text, marginBottom: 2 },
-  rowBetween: { flexDirection: "row", alignItems: "center", gap: 12 },
-  skills: { flexDirection: "row", flexWrap: "wrap", gap: 6, marginTop: 6 },
-  skillBadge: {
-    backgroundColor: colors.primarySoft,
-    borderRadius: 999,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
-  skillText: { fontSize: 12, fontWeight: "600", color: colors.primary },
-  signOut: { alignItems: "center", paddingVertical: 14 },
-  signOutText: { color: colors.danger, fontWeight: "700", fontSize: 14 },
+  scroll: { padding: 18, gap: 13 },
+  title: { fontSize: 26, fontWeight: "900", color: colors.text, letterSpacing: -0.6 },
+  identityCard: { flexDirection: "row", alignItems: "center", gap: 14 },
+  name: { fontSize: 18, fontWeight: "900", color: colors.text },
+  email: { fontSize: 12.5, color: colors.muted, fontWeight: "600" },
+  sectionCard: { gap: 10 },
+  sectionTitle: { fontSize: 15, fontWeight: "800", color: colors.text },
+  rowItem: { flexDirection: "row", alignItems: "center", gap: 9 },
+  rowText: { flex: 1, fontSize: 13.5, color: colors.text, fontWeight: "600", lineHeight: 19 },
+  skillRow: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
+  autoApplyRow: { flexDirection: "row", alignItems: "center", gap: 12 },
+  hint: { fontSize: 12, color: colors.muted, lineHeight: 17 },
 });

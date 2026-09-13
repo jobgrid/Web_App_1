@@ -19,10 +19,31 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   },
 });
 
+export type Role = "candidate" | "employer";
+
+export type Profile = {
+  id: string;
+  role: Role;
+  full_name: string;
+  email: string;
+};
+
+export type Company = {
+  id: string;
+  owner_id: string;
+  name: string;
+  slug: string;
+  brand_color: string;
+  tagline: string;
+  location: string;
+};
+
 export type Job = {
   id: string;
+  company_id: string;
   slug: string;
   title: string;
+  category: string;
   location: string;
   is_remote: boolean;
   work_type: string;
@@ -31,6 +52,7 @@ export type Job = {
   salary_period: string;
   skills: string[];
   tier: "basic" | "branded" | "premium";
+  status: string;
   highlights: string[];
   description: string;
   published_at: string | null;
@@ -38,13 +60,46 @@ export type Job = {
   companies: { name: string; brand_color: string } | null;
 };
 
+export type Application = {
+  id: string;
+  job_id: string;
+  candidate_id: string;
+  status: "submitted" | "viewed" | "shortlisted" | "rejected" | "hired";
+  source: "manual" | "batch" | "auto";
+  match_score: number | null;
+  created_at: string;
+  jobs: {
+    title: string;
+    location: string;
+    companies: { name: string; brand_color: string } | null;
+  } | null;
+  profiles?: { full_name: string } | null;
+};
+
+export type ChatRequest = {
+  id: string;
+  job_id: string | null;
+  candidate_id: string;
+  company_id: string;
+  message: string;
+  status: "pending" | "accepted" | "declined";
+  created_at: string;
+  jobs: { title: string } | null;
+  companies: { name: string; brand_color: string } | null;
+  profiles?: { full_name: string } | null;
+};
+
 export type Conversation = {
   id: string;
+  job_id: string | null;
   candidate_id: string;
+  company_id: string;
   last_message_at: string;
   jobs: { title: string } | null;
-  companies: { name: string } | null;
+  companies: { name: string; brand_color: string } | null;
   profiles: { full_name: string } | null;
+  // Filled client-side from the latest message
+  preview?: { body: string; kind: string; sender_id: string; created_at: string } | null;
 };
 
 export type Message = {
@@ -54,4 +109,10 @@ export type Message = {
   kind: "text" | "voice" | "system";
   body: string;
   created_at: string;
+};
+
+export type Purchase = {
+  id: string;
+  product_code: "basic" | "branded" | "premium";
+  credits_remaining: number;
 };
