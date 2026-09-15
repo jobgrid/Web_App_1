@@ -289,7 +289,8 @@ export async function runQualityControl(opts: {
         card = normalizeAgentCard(fetched.json as Record<string, unknown>, sourceUrl);
       }
     } catch (e) {
-      const checks = cardQualityChecks(null, sourceUrl, rawBody);
+      const template = e instanceof Error && /template|Jekyll/i.test(e.message);
+      const checks = cardQualityChecks(null, sourceUrl, template ? "---\npermalink: /.well-known/agent-card.json" : rawBody);
       checks.push(
         check(
           "protocol",
