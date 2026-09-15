@@ -567,7 +567,12 @@ export default function AccomplishApp({ catalog }: { catalog: Array<{ name: stri
                 aria-label="What do you want to accomplish"
                 disabled={phase === "morphing"}
               />
-              <button type="submit" className={styles.searchGo} disabled={!goal.trim() || phase === "morphing"}>
+              <button
+                type="submit"
+                className={styles.searchGo}
+                disabled={!goal.trim() || phase === "morphing"}
+                onClick={(e) => void submit(e)}
+              >
                 {phase === "home" ? "Continue" : "Search"}
               </button>
             </form>

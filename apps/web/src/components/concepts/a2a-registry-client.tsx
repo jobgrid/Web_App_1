@@ -395,6 +395,17 @@ export default function A2ARegistryClient({
                 <span className={styles.dim}>{card.preferredTransport}</span>
               ) : null}
             </footer>
+            {card.qc ? (
+              <p className={card.qc.passed ? styles.dim : styles.error}>
+                QC {card.qc.grade}
+                {card.qc.checks.some((c) => !c.ok)
+                  ? `: ${card.qc.checks
+                      .filter((c) => !c.ok)
+                      .map((c) => c.detail)
+                      .join("; ")}`
+                  : ""}
+              </p>
+            ) : null}
           </article>
         ))}
       </section>
