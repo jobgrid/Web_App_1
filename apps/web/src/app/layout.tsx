@@ -1,25 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: {
-    default: "JobGrid — The AI job board",
+    default: "JobGrid",
     template: "%s · JobGrid",
   },
-  description:
-    "JobGrid matches your CV to jobs with AI and lets you chat directly with employers. Post jobs from $49 with real-time analytics.",
+  description: "Describe an outcome. JobGrid searches AI agents and assembles a team.",
 };
 
 export default function RootLayout({
@@ -28,14 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        {children}
-        <Toaster position="top-center" richColors />
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }

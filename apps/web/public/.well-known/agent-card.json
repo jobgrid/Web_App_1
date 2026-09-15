@@ -1,0 +1,36 @@
+{
+  "name": "JobGrid Hiring Copilot",
+  "description": "Concept A2A Agent Card for JobGrid — CV matching, employer chat, and hiring Q&A. This card is a discovery prototype for a JobGrid Agent Card registry.",
+  "url": "https://www.jobgrid.ai/api/concepts/a2a/orchestrate",
+  "version": "0.1.0-concept",
+  "protocolVersion": "0.3",
+  "preferredTransport": "HTTP+JSON",
+  "provider": {
+    "organization": "JobGrid",
+    "url": "https://www.jobgrid.ai"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "skills": [
+    {
+      "id": "job-match",
+      "name": "Job matching",
+      "description": "Score candidate CVs against live job ads.",
+      "tags": ["jobs", "matching", "cv", "recruiting"]
+    },
+    {
+      "id": "agent-discovery",
+      "name": "Agent discovery",
+      "description": "Find other A2A Agent Cards by skill, tag, or natural-language ask.",
+      "tags": ["a2a", "registry", "search", "agents"]
+    },
+    {
+      "id": "hiring-qa",
+      "name": "Hiring Q&A",
+      "description": "Answer questions about job posts, applications, and employer chat.",
+      "tags": ["hiring", "chat", "applications"]
+    }
+  ]
+}

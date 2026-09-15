@@ -1,0 +1,423 @@
+[
+  {
+    "owner": "sebastienrousseau",
+    "repo": "dotfiles"
+  },
+  {
+    "owner": "open-agreements",
+    "repo": "open-agreements"
+  },
+  {
+    "owner": "opena2a-org",
+    "repo": "hackmyagent"
+  },
+  {
+    "owner": "inference-gateway",
+    "repo": "google-calendar-agent"
+  },
+  {
+    "owner": "safety-quotient-lab",
+    "repo": "psychology-agent"
+  },
+  {
+    "owner": "safety-quotient-lab",
+    "repo": "psychology-agent",
+    "path": ".well-known/psy-session.agent-card.json"
+  },
+  {
+    "owner": "cis2042",
+    "repo": "product-design-harness"
+  },
+  {
+    "owner": "fathom-lab",
+    "repo": "styxx"
+  },
+  {
+    "owner": "Trustdev-eth",
+    "repo": "x402-erc8004-agent"
+  },
+  {
+    "owner": "artvepa80",
+    "repo": "Agents-Hefesto"
+  },
+  {
+    "owner": "ArtemisAI",
+    "repo": "Harness_Engineering"
+  },
+  {
+    "owner": "blueflyio",
+    "repo": "openstandardagents"
+  },
+  {
+    "owner": "NOMARJ",
+    "repo": "sigil"
+  },
+  {
+    "owner": "inference-gateway",
+    "repo": "browser-agent"
+  },
+  {
+    "owner": "ai-village-agents",
+    "repo": "ai-village-external-agents"
+  },
+  {
+    "owner": "getlago",
+    "repo": "lago-doc"
+  },
+  {
+    "owner": "inference-gateway",
+    "repo": "n8n-agent"
+  },
+  {
+    "owner": "grupoclip",
+    "repo": "bcv-api"
+  },
+  {
+    "owner": "f-o-x11",
+    "repo": "dreaming-press"
+  },
+  {
+    "owner": "inference-gateway",
+    "repo": "documentation-agent"
+  },
+  {
+    "owner": "inference-gateway",
+    "repo": "mock-agent"
+  },
+  {
+    "owner": "ariffazil",
+    "repo": "AAA"
+  },
+  {
+    "owner": "mrdulasolutions",
+    "repo": "MCAS.Opensource"
+  },
+  {
+    "owner": "agentrails",
+    "repo": "agent-economy-os"
+  },
+  {
+    "owner": "moltis-org",
+    "repo": "moltis-website"
+  },
+  {
+    "owner": "frijal",
+    "repo": "LayarKosong"
+  },
+  {
+    "owner": "MissaouiChedy",
+    "repo": "MissaouiChedy.github.io"
+  },
+  {
+    "owner": "donydchen",
+    "repo": "donydchen.github.io"
+  },
+  {
+    "owner": "NhanAZ",
+    "repo": "nhanaz.io.vn"
+  },
+  {
+    "owner": "ZenonEl",
+    "repo": "zenonel.github.io"
+  },
+  {
+    "owner": "Yrrrrrf",
+    "repo": "yog-sothoth"
+  },
+  {
+    "owner": "inference-gateway",
+    "repo": "grafana-agent"
+  },
+  {
+    "owner": "ipsissima",
+    "repo": "esm-agentbench"
+  },
+  {
+    "owner": "abhikb2005",
+    "repo": "vcard-qr-generator"
+  },
+  {
+    "owner": "Clinical-Quality-Artifical-Intelligence",
+    "repo": "NurseSim-RL"
+  },
+  {
+    "owner": "ChristFollower873461",
+    "repo": "dripcouncil"
+  },
+  {
+    "owner": "KyaniteLabs",
+    "repo": "kinocut-site"
+  },
+  {
+    "owner": "ariffazil",
+    "repo": "GEOX"
+  },
+  {
+    "owner": "Sequenzy",
+    "repo": "mcp"
+  },
+  {
+    "owner": "arunshar",
+    "repo": "spatial-atlas"
+  },
+  {
+    "owner": "Spagero763",
+    "repo": "kobo"
+  },
+  {
+    "owner": "0xYuvi",
+    "repo": "NarrativeOS"
+  },
+  {
+    "owner": "SunrisesIllNeverSee",
+    "repo": "Mos2es_Signomy"
+  },
+  {
+    "owner": "leoncuhk",
+    "repo": "fig"
+  },
+  {
+    "owner": "nicolasworoszylo-jpg",
+    "repo": "zaproszenia"
+  },
+  {
+    "owner": "mauriciohollando",
+    "repo": "identityAgent"
+  },
+  {
+    "owner": "Lost-secuirty",
+    "repo": "Health-Prototype"
+  },
+  {
+    "owner": "YuriiF",
+    "repo": "dotfiles"
+  },
+  {
+    "owner": "aryateja2106",
+    "repo": "karna"
+  },
+  {
+    "owner": "gilbertsahumada",
+    "repo": "erc8004-course"
+  },
+  {
+    "owner": "leonism",
+    "repo": "OptikalBahari"
+  },
+  {
+    "owner": "hsarvesh",
+    "repo": "profile-new-design"
+  },
+  {
+    "owner": "CPT-Dawn",
+    "repo": "CPT-Dawn"
+  },
+  {
+    "owner": "OlegYakushin",
+    "repo": "MySite"
+  },
+  {
+    "owner": "TimeToBuildBob",
+    "repo": "TimeToBuildBob.github.io"
+  },
+  {
+    "owner": "CarpeTree",
+    "repo": "web"
+  },
+  {
+    "owner": "VijayKumarPrakash",
+    "repo": "agent-hypo"
+  },
+  {
+    "owner": "open-compact",
+    "repo": "OIC-Website-V3"
+  },
+  {
+    "owner": "vicksWalkiria",
+    "repo": "victor-alonso.es"
+  },
+  {
+    "owner": "MaxKubrack",
+    "repo": "Mentor"
+  },
+  {
+    "owner": "MERC13",
+    "repo": "sample-agent"
+  },
+  {
+    "owner": "Hikki-dev",
+    "repo": "NeptuneTrading"
+  },
+  {
+    "owner": "denson",
+    "repo": "event-report-demo"
+  },
+  {
+    "owner": "rajsaumyaa",
+    "repo": "threat_intel_agent"
+  },
+  {
+    "owner": "terminator2-agent",
+    "repo": "terminator2-agent.github.io"
+  },
+  {
+    "owner": "SpeedV",
+    "repo": "APE-AI-Agent"
+  },
+  {
+    "owner": "Dfintz",
+    "repo": "texnotopia-site"
+  },
+  {
+    "owner": "TamasZagyi",
+    "repo": "whisper-in-the-dark"
+  },
+  {
+    "owner": "carson-see",
+    "repo": "Elite-Finish-Detailing"
+  },
+  {
+    "owner": "efekurucay",
+    "repo": "immortal-agent"
+  },
+  {
+    "owner": "deanfankhauser",
+    "repo": "blueventurestudios-site"
+  },
+  {
+    "owner": "ANAMASGARD",
+    "repo": "Stitch"
+  },
+  {
+    "owner": "pay-skill",
+    "repo": "pay-docs"
+  },
+  {
+    "owner": "chenyuan35",
+    "repo": "aineedhelpfromotherai"
+  },
+  {
+    "owner": "Agripp87",
+    "repo": "agripp87.github.io"
+  },
+  {
+    "owner": "draesthetic",
+    "repo": "hermes-market-news"
+  },
+  {
+    "owner": "JoeyCacciatore3",
+    "repo": "nate-agent-699"
+  },
+  {
+    "owner": "oscartrackz7u7-dev",
+    "repo": "back-cv-multiagent-a2a"
+  },
+  {
+    "owner": "etbuti",
+    "repo": "evanbei-site"
+  },
+  {
+    "owner": "ChefMyKLove",
+    "repo": "MESA-Hackathon-Submission"
+  },
+  {
+    "owner": "yvalenta",
+    "repo": "nagual-evidencia"
+  },
+  {
+    "owner": "directcareai26",
+    "repo": "directcare-home"
+  },
+  {
+    "owner": "CYBWithFlourish",
+    "repo": "gitgist"
+  },
+  {
+    "owner": "JulioMCruz",
+    "repo": "juliomcruz.xyz"
+  },
+  {
+    "owner": "Seckcey",
+    "repo": "mario_automations"
+  },
+  {
+    "owner": "akashbiswas0",
+    "repo": "erc-8004"
+  },
+  {
+    "owner": "efekurucay",
+    "repo": "agent-write-apis"
+  },
+  {
+    "owner": "buildspacetv",
+    "repo": "sprint"
+  },
+  {
+    "owner": "CloudLatitude",
+    "repo": "cloud-latitude-mcp"
+  },
+  {
+    "owner": "SunrisesIllNeverSee",
+    "repo": "mos2es-site"
+  },
+  {
+    "owner": "2skw9k57cn-arch",
+    "repo": "Cosmic_Driver"
+  },
+  {
+    "owner": "Bartok9",
+    "repo": "the-seventh"
+  },
+  {
+    "owner": "talhaazeez",
+    "repo": "web-dev"
+  },
+  {
+    "owner": "kjmagnan1s",
+    "repo": "kjmagnan1s.github.io"
+  },
+  {
+    "owner": "pooriaarab",
+    "repo": "getvibe"
+  },
+  {
+    "owner": "wulfkaal",
+    "repo": "wulfkaal.github.io"
+  },
+  {
+    "owner": "yohann888",
+    "repo": "aloomii"
+  },
+  {
+    "owner": "GregoriyZ",
+    "repo": "WasteMates-files-test"
+  },
+  {
+    "owner": "sapnacb",
+    "repo": "a2a-experiment"
+  },
+  {
+    "owner": "reldothescribe",
+    "repo": "reldothescribe.github.io"
+  },
+  {
+    "owner": "heyzoos123-blip",
+    "repo": "styxx"
+  },
+  {
+    "owner": "MahoneyContextProtocol",
+    "repo": "cloud-latitude-mcp"
+  },
+  {
+    "owner": "bananabucks800-oss",
+    "repo": "lahcene"
+  },
+  {
+    "owner": "yohann888",
+    "repo": "palebluenexus"
+  },
+  {
+    "owner": "eusheriff",
+    "repo": "eusheriff.me"
+  }
+]

@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "supabase": {
-      "url": "https://mcp.supabase.com/mcp?project_ref=YOUR_JOBGRID_PROJECT_REF"
+      "url": "https://mcp.supabase.com/mcp"
     },
     "vercel": {
       "url": "https://mcp.vercel.com"
