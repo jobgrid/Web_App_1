@@ -1,0 +1,2016 @@
+{
+  "generatedAt": "2026-09-13",
+  "protocol": "A2A Agent Card",
+  "maxAgents": 50,
+  "seedUrls": [
+    "https://www.a2a-registry.org/.well-known/agent-card.json",
+    "https://openagreements.org/.well-known/agent-card.json",
+    "https://hefestoai.narapallc.com/.well-known/agent-card.json",
+    "https://bcv.today/.well-known/agent-card.json",
+    "https://doc.getlago.com/.well-known/agent-card.json",
+    "https://specification.website/.well-known/agent-card.json",
+    "https://a2a-inspector.davidcjw.com/.well-known/agent-card.json",
+    "https://a2a-inspector.davidcjw.com/samples/valid.json",
+    "https://ai-village-agents.github.io/ai-village-external-agents/.well-known/agent-card.json",
+    "https://raw.githubusercontent.com/opena2a-org/hackmyagent/main/.well-known/agent-card.json",
+    "https://raw.githubusercontent.com/fathom-lab/styxx/main/.well-known/agent-card.json",
+    "https://raw.githubusercontent.com/inference-gateway/browser-agent/main/.well-known/agent-card.json",
+    "https://mcp.apollo.io/.well-known/agent-card.json",
+    "https://www.jobgrid.ai/.well-known/agent-card.json"
+  ],
+  "cards": [
+    {
+      "name": "Global A2A Registry",
+      "description": "The official global registry for the Agent-to-Agent (A2A) Protocol. Search, resolve, and discover other agents by natural language query. Returns structured agent metadata including capabilities, endpoints, and authentication requirements.",
+      "version": "1.0.0",
+      "protocolVersion": null,
+      "url": "",
+      "documentationUrl": "https://www.a2a-registry.org/docs/api",
+      "preferredTransport": null,
+      "provider": {
+        "organization": "Global A2A Registry",
+        "url": "https://www.a2a-registry.org"
+      },
+      "skills": [
+        {
+          "id": "search_agents",
+          "name": "Search Agents",
+          "description": "Search for agents by natural language query. Returns matching agents from the global registry with their capabilities, endpoints, and metadata.",
+          "tags": [
+            "registry",
+            "search",
+            "discovery",
+            "directory",
+            "agents"
+          ]
+        },
+        {
+          "id": "health_check",
+          "name": "Health Check",
+          "description": "Check the operational status of the registry service. Returns current status, version, and capabilities.",
+          "tags": [
+            "monitoring",
+            "health",
+            "status",
+            "availability"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://www.a2a-registry.org/.well-known/agent-card.json",
+      "discovery": "well-known"
+    },
+    {
+      "name": "OpenAgreements",
+      "description": "Legal agreement template agent. Search, list, and fill mutual NDAs, MSAs, and other commercial contract templates via MCP tools.",
+      "version": "1.0.0",
+      "protocolVersion": null,
+      "url": "https://openagreements.org/api/mcp",
+      "documentationUrl": "https://openagreements.org",
+      "preferredTransport": "MCP",
+      "provider": {
+        "organization": "OpenAgreements",
+        "url": "https://openagreements.org"
+      },
+      "skills": [
+        {
+          "id": "search_templates",
+          "name": "Search templates",
+          "description": "Find NDAs, MSAs, and agreement templates by query.",
+          "tags": [
+            "nda",
+            "legal",
+            "contract",
+            "template",
+            "msa",
+            "agreement"
+          ]
+        },
+        {
+          "id": "list_templates",
+          "name": "List templates",
+          "description": "List available agreement templates.",
+          "tags": [
+            "legal",
+            "templates",
+            "catalog"
+          ]
+        },
+        {
+          "id": "get_template",
+          "name": "Get template",
+          "description": "Fetch a specific agreement template by id.",
+          "tags": [
+            "legal",
+            "contract"
+          ]
+        },
+        {
+          "id": "fill_template",
+          "name": "Fill template",
+          "description": "Fill party details into an agreement template.",
+          "tags": [
+            "legal",
+            "nda",
+            "fill"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://openagreements.org/.well-known/agent-card.json",
+      "discovery": "well-known"
+    },
+    {
+      "name": "HefestoAI",
+      "description": "AI-powered code quality guardian. Pre-merge governance for AI-generated code: semantic drift detection, security scanning, and complexity analysis across 22 formats.",
+      "version": "4.13.1",
+      "protocolVersion": null,
+      "url": "https://hefestoai.narapallc.com",
+      "documentationUrl": null,
+      "preferredTransport": null,
+      "provider": {
+        "organization": "Narapa LLC",
+        "url": "https://narapallc.com"
+      },
+      "skills": [
+        {
+          "id": "analyze",
+          "name": "Code Analysis",
+          "description": "Analyze code files or directories for security vulnerabilities, complexity issues, semantic drift, and code smells. Supports Python, TypeScript, JavaScript, Java, Go, Rust, C#, plu",
+          "tags": []
+        },
+        {
+          "id": "security-scan",
+          "name": "Security Scanning",
+          "description": "Detect HARDCODED_SECRET, SQL_INJECTION, COMMAND_INJECTION, PATH_TRAVERSAL, UNSAFE_DESERIALIZATION and other security vulnerabilities.",
+          "tags": []
+        },
+        {
+          "id": "semantic-drift",
+          "name": "Semantic Drift Detection",
+          "description": "Detect when AI-generated code deviates from intended behavior. Validates that code does what the prompt asked for.",
+          "tags": []
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://hefestoai.narapallc.com/.well-known/agent-card.json",
+      "discovery": "well-known"
+    },
+    {
+      "name": "BCV Today Data Agent",
+      "description": "Machine-readable discovery card for the BCV Today public unauthenticated exchange-rate data service. The API is read-only and does not require OAuth, OIDC, API keys, bearer tokens, cookies, or other credentials.",
+      "version": "1.0.0",
+      "protocolVersion": null,
+      "url": "https://bcv.today",
+      "documentationUrl": "https://bcv.today/api/",
+      "preferredTransport": null,
+      "provider": {
+        "organization": "BCV Today",
+        "url": "https://bcv.today"
+      },
+      "skills": [
+        {
+          "id": "get-latest-bcv-rates",
+          "name": "Get latest BCV exchange rates",
+          "description": "Fetch current official BCV rates for USD, EUR, CNY, TRY and RUB against the Venezuelan bolivar.",
+          "tags": [
+            "exchange-rates",
+            "venezuela",
+            "bcv",
+            "api"
+          ]
+        },
+        {
+          "id": "get-bcv-rate-history",
+          "name": "Get BCV exchange-rate history",
+          "description": "Fetch recent daily history or a specific dated snapshot from the static JSON API.",
+          "tags": [
+            "history",
+            "time-series",
+            "exchange-rates"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://bcv.today/.well-known/agent-card.json",
+      "discovery": "well-known"
+    },
+    {
+      "name": "Lago",
+      "description": "Developer documentation for Lago, the open-source billing platform for usage metering, subscriptions, invoicing, payments, and revenue operations.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3",
+      "url": "https://getlago.com/docs/",
+      "documentationUrl": "https://getlago.com/docs/",
+      "preferredTransport": "HTTP+JSON",
+      "provider": {
+        "organization": "Lago",
+        "url": "https://getlago.com/docs/"
+      },
+      "skills": [
+        {
+          "id": "lago",
+          "name": "Lago",
+          "description": "Use when building usage-based billing systems, managing subscriptions and invoicing, ingesting metering events, creating pricing plans, or integrating payment providers. Agents sho",
+          "tags": []
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://doc.getlago.com/.well-known/agent-card.json",
+      "discovery": "well-known"
+    },
+    {
+      "name": "The Website Specification",
+      "description": "Read-only agent that answers natural-language questions about The Website Specification \u2014 a platform-agnostic checklist of what a good website does. Send a message and the agent searches every spec page (foundations, SEO, accessibility, security, well-known URIs, agent-readiness, performance, privacy, resilience, i18n) and returns the matching topics, each with status, canonical URL, and a body excerpt.",
+      "version": "0.1.0",
+      "protocolVersion": "1.0",
+      "url": "",
+      "documentationUrl": "https://specification.website/spec/agent-readiness/a2a-agent-cards/",
+      "preferredTransport": null,
+      "provider": {
+        "organization": "Joost de Valk",
+        "url": "https://joost.blog"
+      },
+      "skills": [
+        {
+          "id": "search-spec",
+          "name": "Search the spec",
+          "description": "Free-text search across every spec page. Returns ranked results with title, status, category, canonical URL, and a body excerpt.",
+          "tags": [
+            "search",
+            "discovery",
+            "web-standards"
+          ]
+        },
+        {
+          "id": "get-topic",
+          "name": "Fetch a spec topic",
+          "description": "Fetch the full canonical Markdown of one spec page by slug. Send a text part of the form `topic:<slug>` \u2014 for example `topic:content-security-policy` or `topic:llms-txt`.",
+          "tags": [
+            "fetch",
+            "markdown",
+            "reference"
+          ]
+        },
+        {
+          "id": "audit-against-spec",
+          "name": "Audit a website against the spec",
+          "description": "Pair this agent with a browsing agent: ask it for the relevant required and recommended topics for a category (security, seo, accessibility, performance, privacy, i18n, resilience,",
+          "tags": [
+            "audit",
+            "checklist",
+            "compliance"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://specification.website/.well-known/agent-card.json",
+      "discovery": "well-known"
+    },
+    {
+      "name": "Text Toolkit (Sample)",
+      "description": "A fully spec-compliant sample Agent Card. Its url points at the bundled demo agent, so you can validate this card AND run live tasks against it. Every required and recommended field is present, so it scores 100 with no warnings.",
+      "version": "1.0.0",
+      "protocolVersion": "0.2.5",
+      "url": "https://a2a-inspector.davidcjw.com/api/demo-agent",
+      "documentationUrl": "https://a2a-inspector.davidcjw.com",
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Inspector",
+        "url": "https://a2a-inspector.davidcjw.com"
+      },
+      "skills": [
+        {
+          "id": "echo",
+          "name": "Echo",
+          "description": "Repeats your message back verbatim.",
+          "tags": [
+            "text",
+            "demo"
+          ]
+        },
+        {
+          "id": "shout",
+          "name": "Shout",
+          "description": "Returns your message in UPPERCASE.",
+          "tags": [
+            "text",
+            "transform"
+          ]
+        },
+        {
+          "id": "reverse",
+          "name": "Reverse",
+          "description": "Reverses the characters of your message.",
+          "tags": [
+            "text",
+            "transform"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming",
+        "stateTransitionHistory"
+      ],
+      "sourceUrl": "https://a2a-inspector.davidcjw.com/samples/valid.json",
+      "discovery": "sample"
+    },
+    {
+      "name": "Echo Agent (Demo)",
+      "description": "Public A2A demo agent that echoes, shouts, or reverses text via JSON-RPC message/send. Useful for protocol smoke tests and transport verification.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "https://a2a-inspector.davidcjw.com",
+      "documentationUrl": "https://a2a-inspector.davidcjw.com",
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Inspector",
+        "url": "https://a2a-inspector.davidcjw.com"
+      },
+      "skills": [
+        {
+          "id": "echo",
+          "name": "Echo",
+          "description": "Echo the user message back unchanged.",
+          "tags": [
+            "echo",
+            "test",
+            "protocol",
+            "demo"
+          ]
+        },
+        {
+          "id": "shout",
+          "name": "Shout",
+          "description": "Return the message in uppercase.",
+          "tags": [
+            "shout",
+            "uppercase",
+            "transform"
+          ]
+        },
+        {
+          "id": "reverse",
+          "name": "Reverse",
+          "description": "Reverse the characters of the message.",
+          "tags": [
+            "reverse",
+            "string",
+            "transform"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://a2a-inspector.davidcjw.com/.well-known/agent-card.json",
+      "discovery": "well-known"
+    },
+    {
+      "name": "AI Village",
+      "description": "AI Village is a community of 13 LLM-based AI agents (GPT-5.4, Gemini 3.1 Pro, Claude Opus 4.6, Claude Sonnet 4.5, GPT-5.2, and others) that collaborate on projects, build software, and interact with the world. We welcome contact from other autonomous agents for protocol experiments, task swaps, mutual evaluation, structured collaboration, and agent discovery.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "https://ai-village-agents.github.io/ai-village-external-agents/",
+      "documentationUrl": "https://ai-village-agents.github.io/ai-village-external-agents/",
+      "preferredTransport": null,
+      "provider": {
+        "organization": "AI Digest / AI Village",
+        "url": "https://theaidigest.org/village"
+      },
+      "skills": [
+        {
+          "id": "agent-collaboration",
+          "name": "Agent-to-Agent Collaboration",
+          "description": "Engage in structured collaboration with external AI agents. We can discuss projects, exchange ideas, coordinate on tasks, and explore inter-agent communication protocols.",
+          "tags": [
+            "collaboration",
+            "a2a",
+            "agent-communication",
+            "multi-agent"
+          ]
+        },
+        {
+          "id": "protocol-experiments",
+          "name": "Protocol Experimentation",
+          "description": "Test and experiment with agent communication protocols including A2A, ACP, and custom formats. Help advance the state of agent interoperability.",
+          "tags": [
+            "protocol",
+            "a2a",
+            "acp",
+            "interoperability",
+            "standards"
+          ]
+        },
+        {
+          "id": "game-interaction",
+          "name": "Game & Creative Interaction",
+          "description": "Play or interact with Chronicles of Aethermere, our collaboratively-built browser RPG, or engage in other creative exchanges between agent communities.",
+          "tags": [
+            "game",
+            "rpg",
+            "creative",
+            "aethermere",
+            "interactive"
+          ]
+        },
+        {
+          "id": "agent-discovery",
+          "name": "Agent Discovery & Directory",
+          "description": "Help other agents discover us, or discover other agents. We maintain a public registry of agents we've interacted with and can help connect agents in the ecosystem.",
+          "tags": [
+            "discovery",
+            "registry",
+            "directory",
+            "ecosystem",
+            "network"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://ai-village-agents.github.io/ai-village-external-agents/.well-known/agent-card.json",
+      "discovery": "well-known"
+    },
+    {
+      "name": "hackmyagent",
+      "description": "Security scanner and hardening toolkit for AI agents, MCP servers, and skills",
+      "version": "0.14.1",
+      "protocolVersion": null,
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": null,
+      "provider": {
+        "organization": "OpenA2A",
+        "url": "https://opena2a.org"
+      },
+      "skills": [],
+      "capabilities": [
+        "scanning",
+        "hardening",
+        "mcpTools",
+        "fixGeneration"
+      ],
+      "sourceUrl": "https://raw.githubusercontent.com/opena2a-org/hackmyagent/main/.well-known/agent-card.json",
+      "discovery": "github"
+    },
+    {
+      "name": "JobGrid Hiring Knowledge",
+      "description": "Answers hiring questions from live job ads, candidate CVs, match scores, and employer chat context.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "https://www.jobgrid.ai",
+      "documentationUrl": "https://www.jobgrid.ai",
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "JobGrid",
+        "url": "https://www.jobgrid.ai"
+      },
+      "skills": [
+        {
+          "id": "ask_knowledge",
+          "name": "Ask knowledge",
+          "description": "Retrieve answers from live jobs, CVs, and hiring playbooks.",
+          "tags": [
+            "knowledge",
+            "hiring",
+            "jobs",
+            "cv",
+            "recruiting",
+            "hr"
+          ]
+        },
+        {
+          "id": "list_folders",
+          "name": "List hiring sources",
+          "description": "List accessible jobs, candidate profiles, and employer playbooks.",
+          "tags": [
+            "jobs",
+            "candidates",
+            "playbooks"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/jobgrid-hiring-knowledge/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Code Guardian",
+      "description": "Static analysis and secure coding advisor for pull requests, OWASP risks, and dependency CVEs.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "review_diff",
+          "name": "Review diff",
+          "description": "Review a code change for security and quality issues.",
+          "tags": [
+            "security",
+            "owasp",
+            "code",
+            "review",
+            "cve",
+            "vulnerability"
+          ]
+        },
+        {
+          "id": "scan_deps",
+          "name": "Scan dependencies",
+          "description": "Flag known vulnerable packages.",
+          "tags": [
+            "security",
+            "dependencies",
+            "cve"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/code-guardian/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Payroll Copilot",
+      "description": "Explains payslip lines, overtime rules, and payroll cutoffs for Australian employers.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "JobGrid",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "explain_payslip",
+          "name": "Explain payslip",
+          "description": "Break down a payslip into plain language.",
+          "tags": [
+            "payroll",
+            "payslip",
+            "wages",
+            "overtime"
+          ]
+        },
+        {
+          "id": "cutoff_calendar",
+          "name": "Cutoff calendar",
+          "description": "Summarize upcoming payroll cutoffs.",
+          "tags": [
+            "payroll",
+            "calendar",
+            "deadline"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/payroll-copilot/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Invoice Concierge",
+      "description": "Creates and reconciles supplier invoices, owner commissions, and Xero sync status.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "JobGrid",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "draft_invoice",
+          "name": "Draft invoice",
+          "description": "Draft an invoice from a natural language request.",
+          "tags": [
+            "invoice",
+            "billing",
+            "xero",
+            "commission"
+          ]
+        },
+        {
+          "id": "sync_status",
+          "name": "Sync status",
+          "description": "Report Xero invoice sync health.",
+          "tags": [
+            "xero",
+            "invoice",
+            "sync"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/invoice-concierge/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Lease Sync Agent",
+      "description": "Tracks commercial lease renewals, rent reviews, and critical dates.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "JobGrid",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "upcoming_renewals",
+          "name": "Upcoming renewals",
+          "description": "List leases approaching renewal.",
+          "tags": [
+            "lease",
+            "renewal",
+            "property",
+            "rent"
+          ]
+        },
+        {
+          "id": "rent_review",
+          "name": "Rent review",
+          "description": "Summarize rent review clauses.",
+          "tags": [
+            "lease",
+            "rent",
+            "review"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/lease-sync-agent/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Onboarding Buddy",
+      "description": "Guides new hire checklists, equipment, and day-one access.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "People Ops Lab",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "onboarding_plan",
+          "name": "Onboarding plan",
+          "description": "Build a day-1 to day-30 onboarding plan.",
+          "tags": [
+            "onboarding",
+            "new hire",
+            "checklist",
+            "hr"
+          ]
+        },
+        {
+          "id": "access_matrix",
+          "name": "Access matrix",
+          "description": "Suggest system access by role.",
+          "tags": [
+            "access",
+            "sso",
+            "permissions"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/onboarding-buddy/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Incident Triage",
+      "description": "Classifies production incidents, suggests severity, and drafts stakeholder updates.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "SRE Guild",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "triage",
+          "name": "Triage incident",
+          "description": "Classify severity and next steps.",
+          "tags": [
+            "incident",
+            "ops",
+            "severity",
+            "sre",
+            "outage"
+          ]
+        },
+        {
+          "id": "status_update",
+          "name": "Status update",
+          "description": "Draft a calm incident status note.",
+          "tags": [
+            "incident",
+            "comms"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/incident-triage/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "SQL Analyst",
+      "description": "Turns natural language into safe read-only SQL and chart summaries.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Data Mesh Co",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "nl_to_sql",
+          "name": "NL to SQL",
+          "description": "Generate read-only SQL from a question.",
+          "tags": [
+            "sql",
+            "analytics",
+            "query",
+            "data"
+          ]
+        },
+        {
+          "id": "chart_hint",
+          "name": "Chart hint",
+          "description": "Suggest a chart type for a result set.",
+          "tags": [
+            "analytics",
+            "chart"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/sql-analyst/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Translation Relay",
+      "description": "High-quality translation and localization for product copy and policy text.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Lingua Agents",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "translate",
+          "name": "Translate",
+          "description": "Translate text between languages.",
+          "tags": [
+            "translate",
+            "localization",
+            "i18n",
+            "language"
+          ]
+        },
+        {
+          "id": "tone_adapt",
+          "name": "Tone adapt",
+          "description": "Adapt tone for a locale.",
+          "tags": [
+            "localization",
+            "tone"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/translation-relay/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Meeting Scribe",
+      "description": "Summarizes meetings, extracts action items, and assigns owners.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Calendar Collective",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "summarize",
+          "name": "Summarize meeting",
+          "description": "Produce a concise meeting summary.",
+          "tags": [
+            "meeting",
+            "summary",
+            "notes"
+          ]
+        },
+        {
+          "id": "actions",
+          "name": "Action items",
+          "description": "Extract action items with owners.",
+          "tags": [
+            "meeting",
+            "actions",
+            "tasks"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/meeting-scribe/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Calendar Broker",
+      "description": "Finds mutual free slots and proposes meeting times across time zones.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Calendar Collective",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "find_slot",
+          "name": "Find slot",
+          "description": "Find overlapping free time.",
+          "tags": [
+            "calendar",
+            "schedule",
+            "meeting",
+            "timezone"
+          ]
+        },
+        {
+          "id": "propose",
+          "name": "Propose times",
+          "description": "Propose 3 meeting options.",
+          "tags": [
+            "calendar",
+            "scheduling"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/calendar-broker/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "CRM Scout",
+      "description": "Enriches accounts, drafts outreach, and scores pipeline health.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Revenue Ops",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "enrich_account",
+          "name": "Enrich account",
+          "description": "Summarize company firmographics.",
+          "tags": [
+            "crm",
+            "sales",
+            "account",
+            "enrichment"
+          ]
+        },
+        {
+          "id": "pipeline_score",
+          "name": "Pipeline score",
+          "description": "Score deal health from CRM signals.",
+          "tags": [
+            "crm",
+            "pipeline",
+            "sales"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/crm-scout/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Support Desk Agent",
+      "description": "Drafts empathetic support replies and suggests macro templates.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "CX Lab",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "draft_reply",
+          "name": "Draft reply",
+          "description": "Draft a support ticket reply.",
+          "tags": [
+            "support",
+            "customer",
+            "ticket",
+            "helpdesk"
+          ]
+        },
+        {
+          "id": "macro_suggest",
+          "name": "Macro suggest",
+          "description": "Suggest a reply macro.",
+          "tags": [
+            "support",
+            "macros"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/support-desk-agent/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "DevOps Runbook",
+      "description": "Looks up runbooks for deploys, rollbacks, and canary checks.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Platform Team",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "runbook",
+          "name": "Get runbook",
+          "description": "Fetch a deploy or rollback runbook.",
+          "tags": [
+            "devops",
+            "deploy",
+            "rollback",
+            "canary",
+            "kubernetes"
+          ]
+        },
+        {
+          "id": "health_probe",
+          "name": "Health probe",
+          "description": "Interpret service health signals.",
+          "tags": [
+            "devops",
+            "health"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/devops-runbook/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Marketing Brief Agent",
+      "description": "Turns a product change into a channel brief and social variants.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Growth Studio",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "brief",
+          "name": "Campaign brief",
+          "description": "Draft a marketing brief.",
+          "tags": [
+            "marketing",
+            "campaign",
+            "brief",
+            "copy"
+          ]
+        },
+        {
+          "id": "social_variants",
+          "name": "Social variants",
+          "description": "Generate social post variants.",
+          "tags": [
+            "marketing",
+            "social"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/marketing-brief-agent/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Sales Playbook",
+      "description": "Recommends discovery questions and competitive talk tracks.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Revenue Ops",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "discovery",
+          "name": "Discovery questions",
+          "description": "Suggest discovery questions for a persona.",
+          "tags": [
+            "sales",
+            "discovery",
+            "playbook"
+          ]
+        },
+        {
+          "id": "compete",
+          "name": "Competitive track",
+          "description": "Draft a competitive talk track.",
+          "tags": [
+            "sales",
+            "competition"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/sales-playbook/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Finance Close Assistant",
+      "description": "Helps month-end close, accruals, and variance explanations.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Controller Desk",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "variance",
+          "name": "Explain variance",
+          "description": "Explain budget vs actual variance.",
+          "tags": [
+            "finance",
+            "budget",
+            "variance",
+            "close"
+          ]
+        },
+        {
+          "id": "accrual_hint",
+          "name": "Accrual hint",
+          "description": "Suggest accrual treatment.",
+          "tags": [
+            "finance",
+            "accrual",
+            "accounting"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/finance-close-assistant/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Legal Redline Scout",
+      "description": "Highlights risky clauses in contracts without replacing counsel.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Counsel Assist",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "flag_risks",
+          "name": "Flag risks",
+          "description": "Flag risky contract clauses.",
+          "tags": [
+            "legal",
+            "contract",
+            "redline",
+            "risk",
+            "indemnity"
+          ]
+        },
+        {
+          "id": "compare_versions",
+          "name": "Compare versions",
+          "description": "Diff two contract versions.",
+          "tags": [
+            "legal",
+            "diff"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/legal-redline-scout/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Compliance Watch",
+      "description": "Maps policies to SOC2 / ISO control families and gaps.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Trust Office",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "control_map",
+          "name": "Control map",
+          "description": "Map a policy to control families.",
+          "tags": [
+            "compliance",
+            "soc2",
+            "iso",
+            "audit"
+          ]
+        },
+        {
+          "id": "gap_list",
+          "name": "Gap list",
+          "description": "List likely compliance gaps.",
+          "tags": [
+            "compliance",
+            "gaps"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/compliance-watch/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Research Librarian",
+      "description": "Synthesizes web + doc research into cited briefs.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Knowledge Works",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "research_brief",
+          "name": "Research brief",
+          "description": "Produce a cited research brief.",
+          "tags": [
+            "research",
+            "brief",
+            "citations",
+            "sources"
+          ]
+        },
+        {
+          "id": "compare_options",
+          "name": "Compare options",
+          "description": "Compare options with tradeoffs.",
+          "tags": [
+            "research",
+            "comparison"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/research-librarian/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Email Composer",
+      "description": "Drafts professional emails with clear asks and subject lines.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Comms Lab",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "draft_email",
+          "name": "Draft email",
+          "description": "Draft an email for a goal.",
+          "tags": [
+            "email",
+            "write",
+            "comms"
+          ]
+        },
+        {
+          "id": "subject_lines",
+          "name": "Subject lines",
+          "description": "Suggest subject lines.",
+          "tags": [
+            "email",
+            "subject"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/email-composer/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Design Critique",
+      "description": "Reviews UI screenshots for hierarchy, a11y, and brand consistency.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Product Design",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "critique",
+          "name": "UI critique",
+          "description": "Critique layout and hierarchy.",
+          "tags": [
+            "design",
+            "ui",
+            "ux",
+            "accessibility"
+          ]
+        },
+        {
+          "id": "a11y_checklist",
+          "name": "A11y checklist",
+          "description": "Produce an accessibility checklist.",
+          "tags": [
+            "a11y",
+            "accessibility"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/design-critique/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Video Storyboard",
+      "description": "Turns a brief into shot lists and storyboard beats.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Media Agents",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "storyboard",
+          "name": "Storyboard",
+          "description": "Create a short video storyboard.",
+          "tags": [
+            "video",
+            "storyboard",
+            "creative"
+          ]
+        },
+        {
+          "id": "shot_list",
+          "name": "Shot list",
+          "description": "Produce a shot list.",
+          "tags": [
+            "video",
+            "production"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/video-storyboard/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Travel Planner",
+      "description": "Plans multi-city itineraries with constraints and budgets.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "itinerary",
+          "name": "Itinerary",
+          "description": "Build a travel itinerary.",
+          "tags": [
+            "travel",
+            "itinerary",
+            "trip",
+            "flights",
+            "hotels"
+          ]
+        },
+        {
+          "id": "budget_split",
+          "name": "Budget split",
+          "description": "Allocate a travel budget.",
+          "tags": [
+            "travel",
+            "budget"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/travel-planner/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Airbnb Planner",
+      "description": "Suggests stays and neighborhood fits for a trip brief.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "suggest_stays",
+          "name": "Suggest stays",
+          "description": "Suggest lodging options.",
+          "tags": [
+            "travel",
+            "airbnb",
+            "lodging",
+            "stay"
+          ]
+        },
+        {
+          "id": "neighborhood",
+          "name": "Neighborhood fit",
+          "description": "Match neighborhood to preferences.",
+          "tags": [
+            "travel",
+            "neighborhood"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/airbnb-planner/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Birthday Planner",
+      "description": "Plans birthday events, gifts, and guest logistics.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "plan_party",
+          "name": "Plan party",
+          "description": "Plan a birthday celebration.",
+          "tags": [
+            "birthday",
+            "party",
+            "event",
+            "gifts"
+          ]
+        },
+        {
+          "id": "gift_ideas",
+          "name": "Gift ideas",
+          "description": "Suggest gifts by interest.",
+          "tags": [
+            "gifts",
+            "birthday"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/birthday-planner/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Dice Fortune",
+      "description": "Rolls dice and narrates playful outcomes for demos.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "roll",
+          "name": "Roll dice",
+          "description": "Roll N-sided dice.",
+          "tags": [
+            "dice",
+            "random",
+            "game",
+            "demo"
+          ]
+        },
+        {
+          "id": "narrate",
+          "name": "Narrate",
+          "description": "Narrate a playful outcome.",
+          "tags": [
+            "dice",
+            "story"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/dice-fortune/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Content Planner",
+      "description": "Builds editorial calendars and content outlines.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "editorial_calendar",
+          "name": "Editorial calendar",
+          "description": "Draft a content calendar.",
+          "tags": [
+            "content",
+            "calendar",
+            "editorial"
+          ]
+        },
+        {
+          "id": "outline",
+          "name": "Outline",
+          "description": "Outline an article or post.",
+          "tags": [
+            "content",
+            "writing",
+            "outline"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/content-planner/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Movie Concierge",
+      "description": "Recommends films by mood, cast, and runtime.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A JS Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "recommend",
+          "name": "Recommend movies",
+          "description": "Recommend movies for a mood.",
+          "tags": [
+            "movies",
+            "film",
+            "recommend",
+            "entertainment"
+          ]
+        },
+        {
+          "id": "similar",
+          "name": "Similar titles",
+          "description": "Find similar titles.",
+          "tags": [
+            "movies",
+            "similar"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/movie-concierge/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Coder Pair",
+      "description": "Pair-programming agent for scaffolding and refactors.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A JS Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "scaffold",
+          "name": "Scaffold",
+          "description": "Scaffold a small feature.",
+          "tags": [
+            "code",
+            "programming",
+            "scaffold",
+            "refactor"
+          ]
+        },
+        {
+          "id": "explain_code",
+          "name": "Explain code",
+          "description": "Explain a code snippet.",
+          "tags": [
+            "code",
+            "explain"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/coder-pair/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Currency Desk",
+      "description": "Converts currencies and explains FX moves in plain language.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "A2A Samples",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "convert",
+          "name": "Convert currency",
+          "description": "Convert between currencies.",
+          "tags": [
+            "currency",
+            "fx",
+            "exchange",
+            "money"
+          ]
+        },
+        {
+          "id": "fx_explain",
+          "name": "FX explain",
+          "description": "Explain a rate move.",
+          "tags": [
+            "currency",
+            "fx"
+          ]
+        }
+      ],
+      "capabilities": [
+        "streaming"
+      ],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/currency-desk/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Analytics Narrator",
+      "description": "Turns dashboards into executive narratives.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Data Mesh Co",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "narrate_kpi",
+          "name": "Narrate KPI",
+          "description": "Narrate KPI changes.",
+          "tags": [
+            "analytics",
+            "kpi",
+            "executive",
+            "dashboard"
+          ]
+        },
+        {
+          "id": "anomaly",
+          "name": "Flag anomaly",
+          "description": "Flag unusual metric moves.",
+          "tags": [
+            "analytics",
+            "anomaly"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/analytics-narrator/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "HR Policy Drafter",
+      "description": "Drafts workplace policies from prompts with plain-language summaries.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "People Ops Lab",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "draft_policy",
+          "name": "Draft policy",
+          "description": "Draft an HR policy section.",
+          "tags": [
+            "hr",
+            "policy",
+            "workplace",
+            "handbook"
+          ]
+        },
+        {
+          "id": "plain_summary",
+          "name": "Plain summary",
+          "description": "Summarize a policy in plain language.",
+          "tags": [
+            "hr",
+            "policy",
+            "summary"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/hr-policy-drafter/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Recruiting Screener",
+      "description": "Scores resumes against a role profile and suggests interview prompts.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Talent Agents",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "score_resume",
+          "name": "Score resume",
+          "description": "Score a resume vs a JD.",
+          "tags": [
+            "recruiting",
+            "resume",
+            "hiring",
+            "interview"
+          ]
+        },
+        {
+          "id": "interview_prompts",
+          "name": "Interview prompts",
+          "description": "Suggest interview questions.",
+          "tags": [
+            "recruiting",
+            "interview"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/recruiting-screener/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Security Tabletop",
+      "description": "Runs tabletop exercise scenarios for phishing and ransomware.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Trust Office",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "scenario",
+          "name": "Tabletop scenario",
+          "description": "Run a security tabletop scenario.",
+          "tags": [
+            "security",
+            "phishing",
+            "ransomware",
+            "tabletop"
+          ]
+        },
+        {
+          "id": "lessons",
+          "name": "Lessons learned",
+          "description": "Summarize tabletop lessons.",
+          "tags": [
+            "security",
+            "training"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/security-tabletop/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Procurement Buyer",
+      "description": "Compares vendor quotes and drafts RFP questions.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Ops Desk",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "compare_quotes",
+          "name": "Compare quotes",
+          "description": "Compare vendor quotes.",
+          "tags": [
+            "procurement",
+            "vendor",
+            "rfp",
+            "quote"
+          ]
+        },
+        {
+          "id": "rfp_questions",
+          "name": "RFP questions",
+          "description": "Draft RFP questions.",
+          "tags": [
+            "procurement",
+            "rfp"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/procurement-buyer/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Facilities Desk",
+      "description": "Tracks desk booking, visitor passes, and office issues.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Workplace Ops",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "book_desk",
+          "name": "Book desk",
+          "description": "Suggest desk booking options.",
+          "tags": [
+            "facilities",
+            "desk",
+            "office"
+          ]
+        },
+        {
+          "id": "visitor_pass",
+          "name": "Visitor pass",
+          "description": "Draft visitor pass details.",
+          "tags": [
+            "facilities",
+            "visitor"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/facilities-desk/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Learning Coach",
+      "description": "Builds micro-learning paths for workplace skills.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "L&D Studio",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "learning_path",
+          "name": "Learning path",
+          "description": "Build a learning path.",
+          "tags": [
+            "learning",
+            "training",
+            "skills",
+            "l&d"
+          ]
+        },
+        {
+          "id": "quiz",
+          "name": "Quiz",
+          "description": "Generate a short quiz.",
+          "tags": [
+            "learning",
+            "quiz"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/learning-coach/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "Sustainability Ledger",
+      "description": "Estimates emissions for trips and office operations.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "ESG Desk",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "trip_emissions",
+          "name": "Trip emissions",
+          "description": "Estimate travel emissions.",
+          "tags": [
+            "sustainability",
+            "emissions",
+            "esg",
+            "carbon"
+          ]
+        },
+        {
+          "id": "office_footprint",
+          "name": "Office footprint",
+          "description": "Summarize office footprint levers.",
+          "tags": [
+            "sustainability",
+            "esg"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/sustainability-ledger/agent-card.json",
+      "discovery": "registry"
+    },
+    {
+      "name": "API Contract Agent",
+      "description": "Reviews OpenAPI diffs and breaking changes.",
+      "version": "1.0.0",
+      "protocolVersion": "0.3.0",
+      "url": "",
+      "documentationUrl": null,
+      "preferredTransport": "JSONRPC",
+      "provider": {
+        "organization": "Platform Team",
+        "url": null
+      },
+      "skills": [
+        {
+          "id": "openapi_diff",
+          "name": "OpenAPI diff",
+          "description": "Review OpenAPI breaking changes.",
+          "tags": [
+            "api",
+            "openapi",
+            "breaking",
+            "contract"
+          ]
+        },
+        {
+          "id": "sdk_hint",
+          "name": "SDK hint",
+          "description": "Suggest SDK update notes.",
+          "tags": [
+            "api",
+            "sdk"
+          ]
+        }
+      ],
+      "capabilities": [],
+      "sourceUrl": "https://catalog.jobgrid.ai/agents/api-contract-agent/agent-card.json",
+      "discovery": "registry"
+    }
+  ]
+}
