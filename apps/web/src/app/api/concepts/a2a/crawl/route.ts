@@ -6,22 +6,28 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 /**
- * Concept API: crawl public A2A Agent Cards from well-known URIs + GitHub.
- * GET ?mode=seed  → cached discovered cards
- * GET ?mode=live  → re-fetch seed URLs (default)
+ * Discover A2A Agent Cards from well-known URIs, GitHub, and a2aregistry.org.
+ * Live mode QC-tests endpoints; protocol-passing cards are listed on the marketplace.
+ *
+ * GET ?mode=seed  → cached catalog
+ * GET ?mode=live  → GitHub + registry crawl + QC (default)
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const mode = searchParams.get("mode") || "live";
-  const limit = Math.min(Number(searchParams.get("limit") || 50) || 50, 50);
+  const limit = Math.min(Number(searchParams.get("limit") || 80) || 80, 120);
 
   if (mode === "seed") {
+    const cards = getSeededCards().slice(0, limit);
     return NextResponse.json({
       crawledAt: new Date().toISOString(),
-      ok: getSeededCards().length,
+      ok: cards.length,
       failed: 0,
-      cards: getSeededCards().slice(0, limit),
+      cards,
       mode: "seed",
+      githubHits: 0,
+      listed: 0,
+      qcPassed: 0,
     });
   }
 

@@ -19,6 +19,8 @@ function agentPayload(
     discovery: string;
     sourceUrl: string;
     url?: string;
+    qc?: unknown;
+    github?: { owner: string; repo: string; htmlUrl: string };
   },
   extras: {
     confidence?: number;
@@ -40,6 +42,8 @@ function agentPayload(
     url: agent.url || null,
     price: extras.price,
     reputation: extras.reputation,
+    qc: agent.qc || null,
+    github: agent.github || null,
   };
 }
 

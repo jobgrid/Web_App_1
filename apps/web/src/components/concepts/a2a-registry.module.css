@@ -111,7 +111,7 @@
   border-radius: 18px;
   padding: 22px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   align-content: start;
 }
@@ -238,6 +238,11 @@
 .badgeLive {
   background: #d9f5e5;
   color: #0d5c3d;
+}
+
+.badgeFail {
+  background: #f8d7d4;
+  color: #8b1e1a;
 }
 
 .desc {

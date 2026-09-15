@@ -2,7 +2,7 @@
 
 import { FormEvent, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
-import type { CrawlResult, DiscoveredAgentCard } from "@/lib/a2a/types";
+import type { CrawlResult, DiscoveredAgentCard, QualityReport } from "@/lib/a2a/types";
 import styles from "./a2a-registry.module.css";
 
 type ChatMessage = {
@@ -65,6 +65,8 @@ export default function A2ARegistryClient({
   const [chatBusy, setChatBusy] = useState(false);
   const [chatError, setChatError] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [qcBusy, setQcBusy] = useState<string | null>(null);
+  const [qcNote, setQcNote] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -87,7 +89,7 @@ export default function A2ARegistryClient({
     setError(null);
     startTransition(async () => {
       try {
-        const res = await fetch(`/api/concepts/a2a/crawl?mode=${mode}&limit=50`);
+        const res = await fetch(`/api/concepts/a2a/crawl?mode=${mode}&limit=80`);
         const json = await res.json();
         if (!res.ok && json.error) throw new Error(json.error);
         setData(json);
@@ -95,6 +97,44 @@ export default function A2ARegistryClient({
         setError(e instanceof Error ? e.message : "Crawl failed");
       }
     });
+  };
+
+  const testAndList = async (card: DiscoveredAgentCard) => {
+    setQcBusy(card.sourceUrl);
+    setQcNote(null);
+    setError(null);
+    try {
+      const res = await fetch("/api/concepts/a2a/qc", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: card.name,
+          sourceUrl: card.sourceUrl,
+          url: card.url || undefined,
+          list: true,
+        }),
+      });
+      const json = await res.json();
+      const report = json as QualityReport & { error?: string; card?: DiscoveredAgentCard; listed?: boolean };
+      setData((prev) => ({
+        ...prev,
+        listed: (prev.listed || 0) + (report.listed ? 1 : 0),
+        qcPassed: (prev.qcPassed || 0) + (report.passed ? 1 : 0),
+        cards: prev.cards.map((c) =>
+          c.sourceUrl === card.sourceUrl
+            ? { ...(report.card || c), qc: report, listed: Boolean(report.listed) }
+            : c
+        ),
+      }));
+      if (!res.ok || !report.passed) {
+        throw new Error(report.error || "QC failed — not listed");
+      }
+      setQcNote(`Listed ${card.name} on the marketplace after QC.`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "QC failed");
+    } finally {
+      setQcBusy(null);
+    }
   };
 
   const openChat = (card: DiscoveredAgentCard) => {
@@ -165,10 +205,9 @@ export default function A2ARegistryClient({
           <h1>Agent Card registry</h1>
           <p className={styles.lead}>
             Agents publish a digital business card at{" "}
-            <code>/.well-known/agent-card.json</code>. JobGrid crawls those cards —
-            from live domains and GitHub — so hiring and workplace agents can discover each
-            other (A2A). Chat works with the Echo demo and{" "}
-            <strong>OpenAgreements</strong> (legal templates).
+            <code>/.well-known/agent-card.json</code>. JobGrid discovers those cards on
+            live domains and on GitHub, then quality-control tests each endpoint before it
+            can be listed on the marketplace.
           </p>
           <div className={styles.actions}>
             <button
@@ -177,7 +216,7 @@ export default function A2ARegistryClient({
               disabled={pending}
               onClick={() => recrawl("live")}
             >
-              {pending ? "Crawling…" : "Re-crawl live cards"}
+              {pending ? "Discovering GitHub + QC…" : "Discover GitHub cards + QC"}
             </button>
             <button
               type="button"
@@ -203,6 +242,7 @@ export default function A2ARegistryClient({
             </Link>
           </div>
           {error ? <p className={styles.error}>{error}</p> : null}
+          {qcNote ? <p className={styles.meta}>{qcNote}</p> : null}
         </div>
         <aside className={styles.stats}>
           <div>
@@ -214,8 +254,12 @@ export default function A2ARegistryClient({
             <span className={styles.statLabel}>live OK</span>
           </div>
           <div>
-            <span className={styles.statNum}>{data.failed ?? 0}</span>
-            <span className={styles.statLabel}>failed fetches</span>
+            <span className={styles.statNum}>{data.listed ?? data.qcPassed ?? 0}</span>
+            <span className={styles.statLabel}>QC listed</span>
+          </div>
+          <div>
+            <span className={styles.statNum}>{data.githubHits ?? 0}</span>
+            <span className={styles.statLabel}>GitHub hits</span>
           </div>
           <p className={styles.meta}>
             Last crawl {new Date(data.crawledAt).toLocaleString()} · mode{" "}
@@ -233,8 +277,8 @@ export default function A2ARegistryClient({
           aria-label="Filter agent cards"
         />
         <p className={styles.hint}>
-          Discovery paths: well-known URI · curated registry · GitHub{" "}
-          <code>.well-known/agent-card.json</code>
+          Discovery paths: GitHub <code>.well-known/agent-card.json</code> · well-known URI ·
+          a2aregistry.org — then QC before listing
         </p>
       </div>
 
@@ -264,6 +308,11 @@ export default function A2ARegistryClient({
                   ) : null}
                   {card.status === "live" ? (
                     <span className={`${styles.badge} ${styles.badgeLive}`}>live</span>
+                  ) : null}
+                  {card.listed || card.qc?.passed ? (
+                    <span className={`${styles.badge} ${styles.badgeLive}`}>QC listed</span>
+                  ) : card.qc?.grade === "fail" || card.qc?.grade === "card_only" ? (
+                    <span className={`${styles.badge} ${styles.badgeFail}`}>QC {card.qc.grade}</span>
                   ) : null}
                 </div>
               </div>
@@ -311,6 +360,18 @@ export default function A2ARegistryClient({
             ) : null}
 
             <footer className={styles.foot}>
+              <button
+                type="button"
+                className={styles.chatBtn}
+                disabled={qcBusy === card.sourceUrl || Boolean(card.listed || card.qc?.passed)}
+                onClick={() => void testAndList(card)}
+              >
+                {card.listed || card.qc?.passed
+                  ? "On marketplace"
+                  : qcBusy === card.sourceUrl
+                    ? "Testing…"
+                    : "Test & list"}
+              </button>
               {isChatable(card) ? (
                 <button
                   type="button"
@@ -351,8 +412,8 @@ export default function A2ARegistryClient({
           <li>
             Also scan public GitHub repos that ship <code>.well-known/agent-card.json</code>.
           </li>
-          <li>Normalize identity, skills, capabilities, transport, and provider.</li>
-          <li>Surface them here as a curated registry concept for JobGrid A2A.</li>
+          <li>QC-test the card (HTTPS, not a template, public endpoint) and ping A2A/MCP.</li>
+          <li>Only passing agents are listed on the Accomplish marketplace.</li>
         </ol>
         <p>
           JobGrid also publishes a concept card at <code>/.well-known/agent-card.json</code> on

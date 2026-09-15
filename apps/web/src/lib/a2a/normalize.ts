@@ -32,7 +32,7 @@ function discoveryFromUrl(url: string): DiscoveredAgentCard["discovery"] {
   if (url.includes("samples/")) return "sample";
   if (url.includes("raw.githubusercontent.com") || url.includes("github.com")) return "github";
   if (url.includes("/.well-known/")) return "well-known";
-  if (url.includes("a2a-registry")) return "registry";
+  if (url.includes("a2a-registry") || url.includes("a2aregistry.org")) return "registry";
   return "unknown";
 }
 

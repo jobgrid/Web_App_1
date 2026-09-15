@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { randomUUID } from "crypto";
-import { getSeededCards } from "@/lib/a2a/crawl";
+import { getMarketplaceCatalog } from "@/lib/a2a/marketplace";
 import {
   buildSteps,
   localSkillReply,
@@ -162,7 +162,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const catalog = getSeededCards().slice(0, 50);
+  const catalog = getMarketplaceCatalog();
   const shortlist = rankAgents(body.query, catalog, 8);
   if (!shortlist.length) {
     return NextResponse.json({ error: "No agents in catalog" }, { status: 500 });

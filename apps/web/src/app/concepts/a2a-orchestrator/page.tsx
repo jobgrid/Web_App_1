@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import A2AOrchestratorClient from "@/components/concepts/a2a-orchestrator-client";
-import { getSeededCards } from "@/lib/a2a/crawl";
+import { getMarketplaceCatalog } from "@/lib/a2a/marketplace";
 
 export const metadata: Metadata = {
   title: "A2A Agent Orchestrator · JobGrid concept",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default function A2AOrchestratorPage() {
-  const cards = getSeededCards().slice(0, 50).map((c) => ({
+  const cards = getMarketplaceCatalog().map((c) => ({
     name: c.name,
     description: c.description,
     discovery: c.discovery,

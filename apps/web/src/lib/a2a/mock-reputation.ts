@@ -60,7 +60,7 @@ function seededStats(name: string): Omit<MockReputation, "verified" | "source" |
 
 export function getMockReputation(agent: DiscoveredAgentCard): MockReputation {
   const key = agent.name.trim().toLowerCase();
-  const verified = VERIFIED_NAMES.has(key);
+  const verified = agent.qc?.passed ?? VERIFIED_NAMES.has(key);
   const stats = seededStats(agent.name);
   // Verified marketplace demos always show a rating for clearer UI
   if (verified && stats.rating == null) {

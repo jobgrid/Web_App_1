@@ -1,4 +1,4 @@
-import { getSeededCards } from "./crawl";
+import { getMarketplaceCatalog } from "./marketplace";
 import { rankAgents, type AgentMatch } from "./orchestrate";
 import type { DiscoveredAgentCard } from "./types";
 import { getMockPricing, sumMonthly, sumTask, type MockPrice } from "./mock-pricing";
@@ -181,7 +181,7 @@ function passesPreference(price: MockPrice, preference: Preference): boolean {
 }
 
 export function buildAccomplishPlan(goal: string, preference: Preference = "best"): AccomplishPlan {
-  const cards = getSeededCards().slice(0, 50);
+  const cards = getMarketplaceCatalog();
   const capabilities = defaultCapabilitiesForGoal(goal);
   const used = new Set<string>();
   const seats: TeamSeat[] = [];
@@ -241,7 +241,7 @@ export function buildAccomplishPlan(goal: string, preference: Preference = "best
     }
   }
 
-  const results: SearchHit[] = rankAgents(goal, cards, 10).map((m) => {
+  const results: SearchHit[] = rankAgents(goal, cards, 14).map((m) => {
     const price = getMockPricing(m.agent);
     const reputation = getMockReputation(m.agent);
     const skillBit = m.matchedSkills[0] ? ` Skill: ${m.matchedSkills[0]}.` : "";
@@ -271,5 +271,5 @@ export function buildAccomplishPlan(goal: string, preference: Preference = "best
 }
 
 export function catalogSnapshot(): DiscoveredAgentCard[] {
-  return getSeededCards().slice(0, 50);
+  return getMarketplaceCatalog();
 }

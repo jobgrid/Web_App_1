@@ -23,10 +23,14 @@ Secondary browse: `/concepts/a2a-registry` (Discover).
 
 ## Data rules
 
-- Agent name / description / skills / provider come from `seeded-cards.json` (real cards).
+- Agent name / description / skills / provider come from Agent Cards (catalog seeds plus GitHub/registry cards that **pass QC**).
+- GitHub discovery: `.well-known/agent-card.json` (see `lib/a2a/github-index.json`).
+- Connect runs QC first; only passing agents are listed on the marketplace.
 - Pricing lives only in `lib/a2a/mock-pricing.ts` and is labeled prototype in the UI.
 - Never invent Agent Card fields.
 
 ## API
 
 `POST /api/concepts/accomplish` `{ "goal": "…", "preference": "best"|"free"|"fastest"|"quality" }`
+
+QC: `POST /api/concepts/a2a/qc` `{ "sourceUrl", "url", "name", "list": true }`

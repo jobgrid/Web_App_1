@@ -5,7 +5,8 @@
     "dev": "pnpm --filter @jobgrid/web dev",
     "build": "pnpm --filter @jobgrid/web build",
     "lint": "pnpm -r lint",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @jobgrid/web test"
   },
   "packageManager": "pnpm@10.33.3"
 }

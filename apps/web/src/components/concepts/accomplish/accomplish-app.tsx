@@ -21,6 +21,15 @@ type Reputation = {
 
 type Price = { tier: string; label: string; monthlyLabel: string; source: "mock" };
 
+type QcCheck = { id: string; label: string; ok: boolean; detail: string };
+type QcReport = {
+  passed: boolean;
+  listable: boolean;
+  protocolOk: boolean;
+  grade: string;
+  checks: QcCheck[];
+};
+
 type SeatAgent = {
   name: string;
   description: string;
@@ -32,6 +41,8 @@ type SeatAgent = {
   url: string | null;
   price?: Price;
   reputation?: Reputation | null;
+  qc?: QcReport | null;
+  github?: { owner: string; repo: string; htmlUrl: string } | null;
 };
 
 type Seat = {
@@ -54,6 +65,8 @@ type ResultHit = {
   snippet: string;
   price: Price;
   reputation: Reputation;
+  qc?: QcReport | null;
+  github?: { owner: string; repo: string; htmlUrl: string } | null;
 };
 
 type Plan = {
@@ -188,6 +201,10 @@ export default function AccomplishApp({ catalog }: { catalog: Array<{ name: stri
   );
   const [connectTarget, setConnectTarget] = useState<ResultHit | null>(null);
   const [connectAccepted, setConnectAccepted] = useState(false);
+  const [qcStatus, setQcStatus] = useState<"idle" | "running" | "passed" | "failed">("idle");
+  const [qcReport, setQcReport] = useState<QcReport | null>(null);
+  const [qcError, setQcError] = useState<string | null>(null);
+  const [connectBusy, setConnectBusy] = useState(false);
   const [filterVerified, setFilterVerified] = useState(false);
   const [filterFree, setFilterFree] = useState(false);
   const [sortBy, setSortBy] = useState<SortKey>("relevance");
@@ -198,6 +215,40 @@ export default function AccomplishApp({ catalog }: { catalog: Array<{ name: stri
   useEffect(() => {
     if (phase === "home") inputRef.current?.focus();
   }, [phase]);
+
+  useEffect(() => {
+    if (!connectTarget) return;
+    let cancelled = false;
+    const target = connectTarget;
+    void (async () => {
+      try {
+        const res = await fetch("/api/concepts/a2a/qc", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: target.name,
+            sourceUrl: target.sourceUrl || undefined,
+            url: target.url || undefined,
+          }),
+        });
+        const json = await res.json();
+        if (cancelled) return;
+        if (!res.ok && !json.checks) {
+          throw new Error(json.error || `QC failed (${res.status})`);
+        }
+        const report = json as QcReport;
+        setQcReport(report);
+        setQcStatus(report.passed ? "passed" : "failed");
+      } catch (err) {
+        if (cancelled) return;
+        setQcStatus("failed");
+        setQcError(err instanceof Error ? err.message : "QC failed");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [connectTarget]);
 
   const visibleResults = useMemo(() => {
     if (!plan) return [];
@@ -309,19 +360,52 @@ export default function AccomplishApp({ catalog }: { catalog: Array<{ name: stri
   const openConnectModal = (hit: ResultHit) => {
     setConnectTarget(hit);
     setConnectAccepted(false);
+    setQcStatus("running");
+    setQcReport(hit.qc || null);
+    setQcError(null);
   };
 
   const closeConnectModal = () => {
     setConnectTarget(null);
     setConnectAccepted(false);
+    setQcStatus("idle");
+    setQcReport(null);
+    setQcError(null);
+    setConnectBusy(false);
   };
 
-  const confirmConnect = () => {
-    if (!connectTarget || !connectAccepted) return;
-    const name = connectTarget.name;
-    setConnectedNames((prev) => new Set(prev).add(name));
-    setSelected(connectTarget);
-    closeConnectModal();
+  const confirmConnect = async () => {
+    if (!connectTarget || !connectAccepted || qcStatus !== "passed") return;
+    setConnectBusy(true);
+    setQcError(null);
+    try {
+      const res = await fetch("/api/concepts/a2a/qc", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: connectTarget.name,
+          sourceUrl: connectTarget.sourceUrl || undefined,
+          url: connectTarget.url || undefined,
+          list: true,
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.passed) {
+        setQcReport(json.checks ? (json as QcReport) : qcReport);
+        setQcStatus("failed");
+        setQcError(json.error || "QC failed — not added to the marketplace");
+        setConnectBusy(false);
+        return;
+      }
+      const name = connectTarget.name;
+      setConnectedNames((prev) => new Set(prev).add(name));
+      setSelected(connectTarget);
+      closeConnectModal();
+    } catch (err) {
+      setQcStatus("failed");
+      setQcError(err instanceof Error ? err.message : "QC failed");
+      setConnectBusy(false);
+    }
   };
 
   const selectAgent = (hit: ResultHit) => {
@@ -752,7 +836,11 @@ export default function AccomplishApp({ catalog }: { catalog: Array<{ name: stri
                                           )}
                                           {isConnected(r.name) && <span className={styles.connectedBadge}>Connected</span>}
                                         </span>
-                                        <span className={styles.citeUrl}>{hostLabel(r.url, r.sourceUrl)}</span>
+                                        <span className={styles.citeUrl}>
+                                          {hostLabel(r.url, r.sourceUrl)}
+                                          {r.discovery === "github" ? " · GitHub" : ""}
+                                          {r.qc?.grade === "pass" ? " · QC passed" : ""}
+                                        </span>
                                       </span>
                                     </p>
                                     <span className={styles.resultTitle}>{r.name}</span>
@@ -1164,7 +1252,44 @@ export default function AccomplishApp({ catalog }: { catalog: Array<{ name: stri
               </p>
             </section>
 
-            {!connectTarget.reputation.verified && (
+            <section className={styles.connectSection}>
+              <h3>Quality control</h3>
+              <p className={styles.connectMeta}>
+                {qcStatus === "running"
+                  ? "Testing this Agent Card before it can be connected or listed…"
+                  : qcStatus === "passed"
+                    ? "Passed — this agent can be connected and added to the marketplace."
+                    : qcStatus === "failed"
+                      ? "Failed — it will not be added until these checks pass."
+                      : "A live test is required before Connect."}
+              </p>
+              {qcError ? <p className={styles.connectMeta}>{qcError}</p> : null}
+              {qcReport?.checks?.length ? (
+                <ul className={styles.qcList}>
+                  {qcReport.checks.map((c) => (
+                    <li key={c.id} className={c.ok ? styles.qcOk : styles.qcFail}>
+                      <span>{c.ok ? "Pass" : "Fail"}</span>
+                      <span>
+                        <strong>{c.label}</strong>
+                        <em>{c.detail}</em>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+
+            {qcStatus === "failed" && (
+              <div className={styles.connectWarn} role="alert">
+                <strong>QC failed</strong>
+                <p>
+                  JobGrid did not add this agent to the marketplace. Fix the Agent Card or endpoint, then re-open
+                  Connect to test again.
+                </p>
+              </div>
+            )}
+
+            {!connectTarget.reputation.verified && qcStatus !== "failed" && (
               <div className={styles.connectWarn} role="alert">
                 <strong>Unverified agent</strong>
                 <p>
@@ -1216,10 +1341,16 @@ export default function AccomplishApp({ catalog }: { catalog: Array<{ name: stri
               <button
                 type="button"
                 className={styles.startBtn}
-                disabled={!connectAccepted}
-                onClick={confirmConnect}
+                disabled={!connectAccepted || qcStatus !== "passed" || connectBusy}
+                onClick={() => void confirmConnect()}
               >
-                Connect agent
+                {connectBusy
+                  ? "Listing…"
+                  : qcStatus === "running"
+                    ? "Testing…"
+                    : qcStatus === "failed"
+                      ? "Cannot connect"
+                      : "Connect & list"}
               </button>
             </div>
           </div>
