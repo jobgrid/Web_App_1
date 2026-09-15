@@ -195,8 +195,11 @@ export default function A2ARegistryClient({
             >
               A2A discovery docs
             </a>
-            <Link className={`${styles.btn} ${styles.btnPrimary}`} href="/concepts/a2a-orchestrator">
-              Open orchestrator (50 agents)
+            <Link className={`${styles.btn} ${styles.btnPrimary}`} href="/concepts/accomplish">
+              Accomplish (Phase 0)
+            </Link>
+            <Link className={`${styles.btn} ${styles.btnGhost}`} href="/concepts/a2a-orchestrator">
+              Orchestrator (dev)
             </Link>
           </div>
           {error ? <p className={styles.error}>{error}</p> : null}

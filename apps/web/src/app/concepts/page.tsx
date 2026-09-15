@@ -18,13 +18,18 @@ export default function ConceptsIndexPage() {
       </p>
       <ul style={{ listStyle: "none", padding: 0, display: "grid", gap: 12, marginTop: 28 }}>
         <li>
+          <Link href="/concepts/accomplish" style={{ color: "#0f7a5a", fontSize: 18 }}>
+            Accomplish (Phase 0) →
+          </Link>
+        </li>
+        <li>
           <Link href="/concepts/a2a-registry" style={{ color: "#0f7a5a", fontSize: 18 }}>
             Agent Card registry →
           </Link>
         </li>
         <li>
           <Link href="/concepts/a2a-orchestrator" style={{ color: "#0f7a5a", fontSize: 18 }}>
-            Agent orchestrator (Google for agents) →
+            Agent orchestrator (dev) →
           </Link>
         </li>
         <li>

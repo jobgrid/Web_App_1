@@ -36,7 +36,7 @@ export async function SiteHeader() {
             <Link href="/pricing" className="transition-colors hover:text-foreground">
               Pricing
             </Link>
-            <Link href="/concepts/a2a-registry" className="transition-colors hover:text-foreground">
+            <Link href="/concepts/accomplish" className="transition-colors hover:text-foreground">
               AI agents
             </Link>
             {profile && (
