@@ -8,6 +8,13 @@ import { Glass } from "../../ui/Glass";
 import { PressableScale } from "../../ui/PressableScale";
 import { AppText } from "../../ui/Text";
 import { theme } from "../../ui/theme";
+import { SeekerYou } from "../../seeker/YouScreen";
+
+export default function YouScreen() {
+  const { state } = useStore();
+  if (state.session?.side === "jobseeker") return <SeekerYou />;
+  return <EmployerYou />;
+}
 
 const MODES: { id: Autonomy; title: string; body: string }[] = [
   { id: "assisted", title: "Assisted", body: "I’ll recommend the next step. You approve it." },
@@ -15,7 +22,7 @@ const MODES: { id: Autonomy; title: string; body: string }[] = [
   { id: "autonomous", title: "Autonomous", body: "I’ll keep going, and interrupt only when you’re needed." },
 ];
 
-export default function YouScreen() {
+function EmployerYou() {
   const insets = useSafeAreaInsets();
   const { state, editMemory, setAutonomy, signOut } = useStore();
   const [editing, setEditing] = useState<string | null>(null);
@@ -133,7 +140,7 @@ export default function YouScreen() {
             label="Confirm sign out"
             onPress={() => {
               signOut();
-              router.replace("/sign-in");
+              router.replace("/role");
             }}
           >
             <AppText size={16} weight="600" color={theme.pass}>

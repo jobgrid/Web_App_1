@@ -1,6 +1,6 @@
-This is JobGrid Phase 1: the employer iOS app. Employers describe who they need. JobGrid runs a hiring mission. It is not a job board, candidate search, or ATS pipeline.
+This is JobGrid on Expo: the employer hiring mission, and the candidate side where someone says what would make them move. It is not a job board, candidate search, or ATS pipeline.
 
-Routes live in `src/app/`. Domain rules live in `src/domain/`, mock hiring work in `src/services/`, and UI in `src/ui/`. Replace the mock service later without rewriting screens.
+Routes live in `src/app/`. Domain rules live in `src/domain/`, mock hiring and opportunity work in `src/services/`, and UI in `src/ui/`. Replace the mock services later without rewriting screens.
 
 Prioritize mobile-first patterns, performance, and cross-platform compatibility.
 

@@ -19,7 +19,10 @@ const ICONS = {
 export function GlassTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   const { state: app } = useStore();
-  const openInbox = app.inbox.filter((item) => !item.resolution).length;
+  const openInbox =
+    app.session?.side === "jobseeker"
+      ? app.seeker.inbox.filter((item) => !item.resolution).length
+      : app.inbox.filter((item) => !item.resolution).length;
   const [layouts, setLayouts] = useState<{ x: number; width: number }[]>([]);
   const x = useSharedValue(0);
   const width = useSharedValue(72);

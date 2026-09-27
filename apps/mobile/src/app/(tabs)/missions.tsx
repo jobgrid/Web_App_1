@@ -7,8 +7,15 @@ import { Glass } from "../../ui/Glass";
 import { PressableScale } from "../../ui/PressableScale";
 import { AppText } from "../../ui/Text";
 import { theme } from "../../ui/theme";
+import { SeekerMissions } from "../../seeker/MissionsScreen";
 
 export default function MissionsScreen() {
+  const { state } = useStore();
+  if (state.session?.side === "jobseeker") return <SeekerMissions />;
+  return <EmployerMissions />;
+}
+
+function EmployerMissions() {
   const insets = useSafeAreaInsets();
   const { state } = useStore();
 

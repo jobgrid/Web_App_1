@@ -4,6 +4,6 @@ import { useStore } from "../state/store";
 export default function Gate() {
   const { state } = useStore();
   if (!state.onboarded) return <Redirect href="/onboarding" />;
-  if (!state.session) return <Redirect href="/sign-in" />;
+  if (!state.session) return <Redirect href="/role" />;
   return <Redirect href="/(tabs)" />;
 }

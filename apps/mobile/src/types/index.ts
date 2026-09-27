@@ -196,10 +196,13 @@ export interface HiringDraft {
   awaiting: "clarification" | "ready";
 }
 
+export type AccountSide = "employer" | "jobseeker";
+
 export interface Session {
   name: string;
   email: string;
-  role: "Owner";
+  role: "Owner" | "Candidate";
+  side: AccountSide;
 }
 
 export interface Organisation {
@@ -236,4 +239,105 @@ export interface Extraction {
   headcount: number;
   similarTo: string | null;
   requirements: Requirement[];
+}
+
+export type OpportunityMode =
+  | "not_looking"
+  | "quietly_listening"
+  | "open"
+  | "actively_looking"
+  | "available_immediately";
+
+export type MoveCategory = "role" | "current_salary" | "salary_floor" | "commute" | "schedule" | "other";
+
+export interface MovePreference {
+  id: string;
+  description: string;
+  category: MoveCategory;
+  mandatory: boolean;
+  amount?: number;
+}
+
+export interface OpportunityProfile {
+  role: string | null;
+  currentSalary: number | null;
+  minimumSalary: number | null;
+  homeArea: string | null;
+  preferences: MovePreference[];
+}
+
+export interface WatchCounts {
+  assessed: number;
+  close: number;
+  worthInterrupting: number;
+}
+
+export type OpportunityStatus = "new" | "interested" | "shared" | "declined";
+
+export interface Opportunity {
+  id: string;
+  practice: string;
+  role: string;
+  location: string;
+  salaryLabel: string;
+  salaryMin: number;
+  salaryMax: number;
+  commuteMinutes: number;
+  schedule: string;
+  week: string;
+  status: OpportunityStatus;
+  declineReason?: string;
+}
+
+export type VisibilitySetting = "hidden" | "matched_only" | "open";
+export type ContactSetting = "jobgrid_only" | "practice_through_jobgrid";
+export type IdentitySetting = "withheld" | "first_name" | "full_name";
+export type SalaryVisibility = "hidden" | "move_range" | "exact";
+
+export interface ConsentSettings {
+  visibility: VisibilitySetting;
+  contact: ContactSetting;
+  identity: IdentitySetting;
+  salary: SalaryVisibility;
+}
+
+export interface SeekerNote {
+  id: string;
+  role: "candidate" | "jobgrid";
+  text: string;
+}
+
+export interface SeekerInboxItem {
+  id: string;
+  opportunityId?: string;
+  title: string;
+  body: string;
+  actions: { id: string; label: string }[];
+  createdAt: string;
+  resolution?: string;
+}
+
+export type MovePending = "role" | "pay" | null;
+
+export interface MoveDraft {
+  notes: SeekerNote[];
+  profile: OpportunityProfile;
+  ready: boolean;
+  pending: MovePending;
+  question: string | null;
+  choices: { id: string; label: string }[];
+}
+
+export interface SeekerSlice {
+  draft: MoveDraft | null;
+  profile: OpportunityProfile | null;
+  confirm: string | null;
+  mode: OpportunityMode;
+  watch: WatchCounts;
+  watching: boolean;
+  quiet: string | null;
+  opportunity: Opportunity | null;
+  consent: ConsentSettings;
+  inbox: SeekerInboxItem[];
+  conversation: SeekerNote[];
 }

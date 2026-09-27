@@ -10,19 +10,22 @@ import {
 import { firstName, uid, weeksPhrase } from "../domain/format";
 import { interpret, isMissionQuestion } from "../domain/interpret";
 import { buildMission, inferredFacts } from "../domain/mission";
-import { hiringWork, type SimEvent } from "../services";
+import { hiringWork, opportunityWork, type SimEvent } from "../services";
 import type {
   Autonomy,
   Candidate,
   ChatMessage,
+  ConsentSettings,
   HiringDraft,
   InboxItem,
   MemoryFact,
   Mission,
+  OpportunityMode,
   Requirement,
   Session,
   Organisation,
 } from "../types";
+import { applySeeker, emptySeeker, type SeekerAction } from "./seeker";
 
 export interface SignInInput {
   name: string;
@@ -42,6 +45,7 @@ export interface AppState {
   candidates: Candidate[];
   inbox: InboxItem[];
   threads: Record<string, ChatMessage[]>;
+  seeker: import("../types").SeekerSlice;
 }
 
 const initialState: AppState = {
@@ -55,6 +59,7 @@ const initialState: AppState = {
   candidates: [],
   inbox: [],
   threads: {},
+  seeker: emptySeeker(),
 };
 
 type Action =
@@ -69,7 +74,8 @@ type Action =
   | { type: "pass"; candidateId: string; reason: string }
   | { type: "resolve"; itemId: string; resolution: string }
   | { type: "memory"; id: string; value: string }
-  | { type: "autonomy"; autonomy: Autonomy };
+  | { type: "autonomy"; autonomy: Autonomy }
+  | SeekerAction;
 
 function practiceMemory(): MemoryFact[] {
   return [
@@ -235,7 +241,26 @@ function replyFor(state: AppState, mission: Mission, text: string): ChatMessage[
   ];
 }
 
+function isSeekerAction(action: Action): action is SeekerAction {
+  return (
+    action.type === "seeker-sign-in" ||
+    action.type === "move-text" ||
+    action.type === "looking" ||
+    action.type === "seeker-sim" ||
+    action.type === "mode" ||
+    action.type === "consent" ||
+    action.type === "home-area" ||
+    action.type === "interest" ||
+    action.type === "decline" ||
+    action.type === "ask" ||
+    action.type === "profile-edit" ||
+    action.type === "preference" ||
+    action.type === "clear-move"
+  );
+}
+
 function reducer(state: AppState, action: Action): AppState {
+  if (isSeekerAction(action)) return applySeeker(state, action);
   switch (action.type) {
     case "onboard":
       return { ...state, onboarded: true };
@@ -243,7 +268,7 @@ function reducer(state: AppState, action: Action): AppState {
       return {
         ...state,
         onboarded: true,
-        session: { name: action.input.name.trim(), email: action.input.email.trim(), role: "Owner" },
+        session: { name: action.input.name.trim(), email: action.input.email.trim(), role: "Owner", side: "employer" },
         organisation: { id: uid("org"), name: action.input.organisation.trim(), location: action.input.location.trim() },
         memory: [
           { id: "location", label: "Location", value: action.input.location.trim(), scope: "organisation", inferred: false },
@@ -380,6 +405,18 @@ interface StoreValue {
   resolveInbox: (itemId: string, resolution: string) => void;
   editMemory: (id: string, value: string) => void;
   setAutonomy: (autonomy: Autonomy) => void;
+  signInSeeker: (input: { name: string; email: string }) => void;
+  submitMove: (text: string) => void;
+  startLooking: () => void;
+  setOpportunityMode: (mode: OpportunityMode) => void;
+  setConsent: (consent: ConsentSettings) => void;
+  setHomeArea: (area: string) => void;
+  showInterest: () => void;
+  declineOpportunity: (reason: string) => void;
+  askOpportunity: (text: string) => void;
+  editSeekerProfile: (input: { name: string; currentSalary: number | null; role: string }) => void;
+  editPreference: (id: string, mandatory: boolean, amount?: number) => void;
+  clearMove: () => void;
 }
 
 const StoreContext = createContext<StoreValue | null>(null);
@@ -395,8 +432,26 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       signIn: (input) => dispatch({ type: "sign-in", input }),
       signOut: () => {
         for (const mission of stateRef.current.missions) hiringWork.stop(mission.id);
+        opportunityWork.stop();
         dispatch({ type: "sign-out" });
       },
+      signInSeeker: (input) => dispatch({ type: "seeker-sign-in", name: input.name, email: input.email }),
+      submitMove: (text) => dispatch({ type: "move-text", text }),
+      startLooking: () => {
+        const profile = stateRef.current.seeker.draft?.profile;
+        if (!profile?.role || !profile.minimumSalary) return;
+        dispatch({ type: "looking" });
+        opportunityWork.start(profile, (event) => dispatch({ type: "seeker-sim", event }));
+      },
+      setOpportunityMode: (mode) => dispatch({ type: "mode", mode }),
+      setConsent: (consent) => dispatch({ type: "consent", consent }),
+      setHomeArea: (area) => dispatch({ type: "home-area", area }),
+      showInterest: () => dispatch({ type: "interest" }),
+      declineOpportunity: (reason) => dispatch({ type: "decline", reason }),
+      askOpportunity: (text) => dispatch({ type: "ask", text }),
+      editSeekerProfile: (input) => dispatch({ type: "profile-edit", ...input }),
+      editPreference: (id, mandatory, amount) => dispatch({ type: "preference", id, mandatory, amount }),
+      clearMove: () => dispatch({ type: "clear-move" }),
       submitText: (text) => {
         const current = stateRef.current;
         const latest = current.missions[0];

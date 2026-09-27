@@ -10,8 +10,8 @@ import { theme } from "../ui/theme";
 
 const PAGES = [
   {
-    title: "Who do you need?",
-    body: "Tell JobGrid. We’ll find, engage, and qualify the right people.",
+    title: "Tell JobGrid.",
+    body: "Hiring someone, or ready to move. You describe the outcome. JobGrid does the searching.",
   },
   {
     title: "A mission, not a job ad.",
@@ -31,7 +31,7 @@ export default function OnboardingScreen() {
 
   const finish = () => {
     completeOnboarding();
-    router.replace("/sign-in");
+    router.replace("/role");
   };
 
   return (

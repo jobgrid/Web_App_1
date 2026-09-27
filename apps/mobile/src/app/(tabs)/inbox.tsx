@@ -6,8 +6,15 @@ import { Glass } from "../../ui/Glass";
 import { PressableScale } from "../../ui/PressableScale";
 import { AppText } from "../../ui/Text";
 import { theme } from "../../ui/theme";
+import { SeekerInbox } from "../../seeker/InboxScreen";
 
 export default function InboxScreen() {
+  const { state } = useStore();
+  if (state.session?.side === "jobseeker") return <SeekerInbox />;
+  return <EmployerInbox />;
+}
+
+function EmployerInbox() {
   const insets = useSafeAreaInsets();
   const { state, pass, resolveInbox } = useStore();
   const open = state.inbox.filter((item) => !item.resolution);

@@ -20,19 +20,19 @@ type SpeechWindow = Window & {
   webkitSpeechRecognition?: new () => SpeechRecognitionLike;
 };
 
-export function transcribeUtterance(): Promise<string> {
+export function transcribeUtterance(fallback = DEMO_UTTERANCE): Promise<string> {
   return new Promise((resolve) => {
     let settled = false;
     const finish = (text: string) => {
       if (settled) return;
       settled = true;
-      resolve(text.trim() || DEMO_UTTERANCE);
+      resolve(text.trim() || fallback);
     };
 
     const host = typeof window === "undefined" ? undefined : (window as SpeechWindow);
     const Recognition = host?.SpeechRecognition ?? host?.webkitSpeechRecognition;
     if (!Recognition) {
-      setTimeout(() => finish(DEMO_UTTERANCE), 1100);
+      setTimeout(() => finish(fallback), 1100);
       return;
     }
 
@@ -41,19 +41,19 @@ export function transcribeUtterance(): Promise<string> {
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
     recognition.onresult = (event) => finish(event.results[0][0].transcript);
-    recognition.onerror = () => finish(DEMO_UTTERANCE);
-    recognition.onend = () => finish(DEMO_UTTERANCE);
+    recognition.onerror = () => finish(fallback);
+    recognition.onend = () => finish(fallback);
     try {
       recognition.start();
     } catch {
-      finish(DEMO_UTTERANCE);
+      finish(fallback);
       return;
     }
     setTimeout(() => {
       try {
         recognition.stop();
       } catch {
-        finish(DEMO_UTTERANCE);
+        finish(fallback);
       }
     }, 4500);
   });

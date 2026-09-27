@@ -12,8 +12,15 @@ import { PressableScale } from "../../ui/PressableScale";
 import { AppText } from "../../ui/Text";
 import { theme } from "../../ui/theme";
 import { Thread } from "../../ui/Thread";
+import { SeekerHome } from "../../seeker/HomeScreen";
 
 export default function HomeScreen() {
+  const { state } = useStore();
+  if (state.session?.side === "jobseeker") return <SeekerHome />;
+  return <EmployerHome />;
+}
+
+function EmployerHome() {
   const insets = useSafeAreaInsets();
   const { state, submitText, updateDraftRequirements, clearDraft, startHiring } = useStore();
   const [text, setText] = useState("");

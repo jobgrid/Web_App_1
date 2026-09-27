@@ -7,6 +7,11 @@ Minimum two years of experience in a dental practice.
 They need to know D4W for appointments, recalls, and treatment coordination.
 Salary up to $75,000 plus super.`;
 
+export const SEEKER_DEMO_UTTERANCE =
+  "I'm a physiotherapist on $105k, and would move for $120k+, closer to home, no Saturdays.";
+
+export const SEEKER_PROMPTS = [{ id: "physio-move", label: "Physiotherapist, $120k+", text: SEEKER_DEMO_UTTERANCE }];
+
 export const EXAMPLE_PROMPTS = [
   { id: "dental", label: "Dental receptionist in Parramatta", text: DEMO_UTTERANCE },
   { id: "physio", label: "Two physiotherapists in Brisbane", text: "Find me two physiotherapists for our Brisbane clinic." },
